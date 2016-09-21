@@ -30,6 +30,12 @@
     <author fullname="Martijn Schmidt" initials="M." surname="Schmidt">
         <organization>i3D.net</organization>
         <address>
+            <postal>
+                <street>Rivium 1e Straat 1</street>
+                <code>2909 LE</code>
+                <city>Capelle aan den IJssel</city>
+                <country>NL</country>
+            </postal>
             <email>martijnschmidt@i3d.net</email>
         </address>
     </author>
@@ -82,6 +88,10 @@
   <middle>
     <section title="Introduction">
         <t>
+            The traditional BGP Community Attribute standard <xref target="RFC1997"/> has enjoyed wide adoption by Internet backbone operators, however it is limited to two fields - each with room for a 2-Octet value. With the amount of 4-Octet Autonomous System Numbers in the default-free zone rapidly growing, draft-heitz-idr-large-community was proposed to the working group to create feature parity between 2-Octet and 4-Octet ASNs. Besides allowing operators to specify two 4-byte ASNs as per RFC1997 style communities, a third field was added to be able to signal an action without losing information about either the actor or the target.
+        </t>
+        <t>
+            This document presents a set of examples on how the Large Community standard could be implemented by an operator to achieve various goals. It should however be noted that the Large Community standard is opaque, any recommendations made in this document may be ignored by the operator.
         </t>
     </section>
 
