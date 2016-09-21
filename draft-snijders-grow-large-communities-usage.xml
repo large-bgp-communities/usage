@@ -27,6 +27,18 @@
         </address>
     </author>
 
+    <author fullname="Brad" initials="D." surname="Dreisbach">
+        <organization abbrev="NTT">NTT Communications</organization>
+        <address>
+            <postal>
+                <city>Springfield<city>
+                <region>VA<region>
+                <country>USA</country>
+            </postal>
+            <email>bradd@ntt.net</email>
+        </address>
+    </author>
+
     <author fullname="Martijn Schmidt" initials="M." surname="Schmidt">
         <organization>i3D.net</organization>
         <address>
