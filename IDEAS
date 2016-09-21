@@ -20,9 +20,21 @@ C	Continent where the route was learned.
 T	Type of relationship with BGP neighbor.
 LLL	Location where the route was learned.
 
-Trouble with this situation is that one can not distinguish between routes learned on different IX'es in the same city. Consider LINX LON1, LINX LON2, and LONAP: all are public peering locations in London. Two new formats may be considered here; Actor:Peer:Location for private relations and Actor:RS-ASN:Location for public relations. Allows one to distinguish between let's say LINX and LONAP since RS ASN's are different, also allows one to distinguish between LINX LON and LINX NoVA, but doesn't tackle the difference between two IX LANs operated by the same entity within one city (e.g. LINX LON1/LON2, Netnod Stockholm A/B). Same goes for redundant private connections. Use a bit in the location field, or simply don't care?
+Trouble with this situation is that one can not distinguish between routes
+learned on different IX'es in the same city. Consider LINX LON1, LINX LON2, and
+LONAP: all are public peering locations in London. Two new formats may be
+considered here; Actor:Peer:Location for private relations and
+Actor:RS-ASN:Location for public relations. Allows one to distinguish between
+let's say LINX and LONAP since RS ASN's are different, also allows one to
+distinguish between LINX LON and LINX NoVA, but doesn't tackle the difference
+between two IX LANs operated by the same entity within one city (e.g. LINX
+LON1/LON2, Netnod Stockholm A/B). Same goes for redundant private connections.
+Use a bit in the location field, or simply don't care?
 
-Location - previously limited to 3 bits (4 if we include continent). Some operators like NTT, Level3, etc used arbitrary values in this field. i3D.net chose to go with a mixture of various standards that happened to fit in our 3 bits:
+Location - previously limited to 3 bits (4 if we include continent). Some
+operators like NTT, Level3, etc used arbitrary values in this field. i3D.net
+chose to go with a mixture of various standards that happened to fit in our 3
+bits:
 
 
 * North America:
@@ -30,37 +42,72 @@ Location - previously limited to 3 bits (4 if we include continent). Some operat
 * 1 United States of America
 * 2 Canada
 
-* For USA, the second and third location digits indicate State ANSI FIPS code: http://www.census.gov/geo/reference/ansi_statetables.html
-* For Canada, the second and third location digits indicate Canada's SGC Provinces and Territories code: http://en.wikipedia.org/wiki/Standard_Geographical_Classification_code_(Canada)#Provinces_and_Territories
+* For USA, the second and third location digits indicate State ANSI FIPS code:
+* http://www.census.gov/geo/reference/ansi_statetables.html
+* For Canada, the second and third location digits indicate Canada's SGC
+* Provinces and Territories code:
+* http://en.wikipedia.org/wiki/Standard_Geographical_Classification_code_(Canada)#Provinces_and_Territories
 
 * Rest of the world:
-* The three location digits are the ITU-T E.164 telephone country code: http://en.wikipedia.org/wiki/List_of_country_calling_codes#Alphabetical_listing_by_country_or_region
+* The three location digits are the ITU-T E.164 telephone country code:
+* http://en.wikipedia.org/wiki/List_of_country_calling_codes#Alphabetical_listing_by_country_or_region
 
-The new standard provides a significant number of additional bits, would suggest to pick a single international standard which can encode location at least down to a city level. Another alternative - geographical coordinates? Either way, should probably require the user to fill the field up with zero's to a certain amount of bits to avoid conflicts with action communities which have shorter codes in the third field to be used for signalling.
+The new standard provides a significant number of additional bits, would
+suggest to pick a single international standard which can encode location at
+least down to a city level. Another alternative - geographical coordinates?
+Either way, should probably require the user to fill the field up with zero's
+to a certain amount of bits to avoid conflicts with action communities which
+have shorter codes in the third field to be used for signalling.
 
 =========================
 
-2a. Traditional global-effect prepending and no-export seems like a no-brainer for private interconnections: actor:target:action
+2a. Traditional global-effect prepending and no-export seems like a no-brainer
+for private interconnections: actor:target:action
 
-Actor and target should be an IANA-allocated ASN, action can be 1 / 2 / 3 to specify the amount of prepends or 0 to signal the actor that the prefix shouldn't be exported to the target.
+Actor and target should be an IANA-allocated ASN, action can be 1 / 2 / 3 to
+specify the amount of prepends or 0 to signal the actor that the prefix
+shouldn't be exported to the target.
 
 Challenges for IX'es in this model are:
-- If we insert the RS-ASN as target, do we only want to signal towards the route-server or to the whole IX? This is ambigious.
-- If we have an IX operator with multiple peering LANs around the world using a single RS-ASN - such as Equinix - how do we target specific IX cities?
+- If we insert the RS-ASN as target, do we only want to signal towards the
+  route-server or to the whole IX? This is ambigious.
+- If we have an IX operator with multiple peering LANs around the world using a
+  single RS-ASN - such as Equinix - how do we target specific IX cities?
 - Format of actor:actor:
 
-2b. Regional-effect prepending and no-export - actor:target remains the same, third field should change to signify the new desired action. Does this also tackle our IX dilemma, e.g. should an actor:target:2 tag by default signal two prepends to all IX'es using that RS-ASN, and rely on the third field?
+2b. Regional-effect prepending and no-export - actor:target remains the same,
+third field should change to signify the new desired action. Does this also
+tackle our IX dilemma, e.g. should an actor:target:2 tag by default signal two
+prepends to all IX'es using that RS-ASN, and rely on the third field?
 
 =========================
 
-3. Blackholes should never be propagated outside the actor's ASN unless one wants to achieve a blackhole in the upstream's ASN, too.
+3. Blackholes should never be propagated outside the actor's ASN unless one
+wants to achieve a blackhole in the upstream's ASN, too.
 
-3a. should there even be a -large version of a simple global blackhole, since that basic functionality is already covered by draft-ietf-grow-blackholing-03? See also 3b, where the suggested format is blackhole-asn:type:data - so the dumb community could be something like 64666:0:666
+3a. should there even be a -large version of a simple global blackhole, since
+that basic functionality is already covered by draft-ietf-grow-blackholing-03?
+See also 3b, where the suggested format is blackhole-asn:type:data - so the
+dumb community could be something like 64666:0:666
 
-3b. selective blackholes should never be propagated outside the actor's ASN, e.g. the one which performs the action. Since we don't want different communities for different operators, but rather, a standardized method to accomplish certain actions so end users need to modify as little as possible in case of emergency, the first field in the Large Community should always be the same. That opens up the possibility to signal a blackhole action through the first field of the Large community, reserving the second field for the type of blackhole (e.g. dumb, selective radius, selective location, selective router, selective arbitrary value), and the third field for the aforementioned data.
+3b. selective blackholes should never be propagated outside the actor's ASN,
+e.g. the one which performs the action. Since we don't want different
+communities for different operators, but rather, a standardized method to
+accomplish certain actions so end users need to modify as little as possible in
+case of emergency, the first field in the Large Community should always be the
+same. That opens up the possibility to signal a blackhole action through the
+first field of the Large community, reserving the second field for the type of
+blackhole (e.g. dumb, selective radius, selective location, selective router,
+selective arbitrary value), and the third field for the aforementioned data.
 
-AS666 belongs to an actual network so while it's become somewhat of a de-facto standard for RFC1997 communities I'd like to refrain from using it in the first field. Should IANA allocate a special-purpose ASN with a bunch of 6's, or do we use something like 64666 which falls into RFC6996?
+AS666 belongs to an actual network so while it's become somewhat of a de-facto
+standard for RFC1997 communities I'd like to refrain from using it in the first
+field. Should IANA allocate a special-purpose ASN with a bunch of 6's, or do we
+use something like 64666 which falls into RFC6996?
 
 ===========================
 
-4. Usually implemented as actor:desired-localpref with RFC1997. Could now be expanded to actor:location:localpref, where location could also target "global". We don't need a separate community for active/passive signalling, that can be tackled with the to-be-determined location tag for "global".
+4. Usually implemented as actor:desired-localpref with RFC1997. Could now be
+expanded to actor:location:localpref, where location could also target
+"global". We don't need a separate community for active/passive signalling,
+that can be tackled with the to-be-determined location tag for "global".
