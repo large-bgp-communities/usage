@@ -100,15 +100,55 @@
   <middle>
     <section title="Introduction">
         <t>
-            The traditional BGP Community Attribute standard <xref target="RFC1997"/> has enjoyed wide adoption by Internet backbone operators, however it is limited to two fields - each with room for a 2-Octet value. With the amount of 4-Octet Autonomous System Numbers in the default-free zone rapidly growing, draft-heitz-idr-large-community was proposed to the working group to create feature parity between 2-Octet and 4-Octet ASNs. Besides allowing operators to specify two 4-byte ASNs as per RFC1997 style communities, a third field was added to be able to signal an action without losing information about either the actor or the target.
+            The traditional BGP Community Attribute standard <xref target="RFC1997"/>
+            has enjoyed wide adoption by Internet backbone operators, however
+            it is limited to two fields - each with room for a 2-Octet value.
+            With the amount of 4-Octet Autonomous System Numbers in the
+            default-free zone rapidly growing, draft-heitz-idr-large-community
+            was proposed to the working group to create feature parity between
+            2-Octet and 4-Octet ASNs. Besides allowing operators to specify two
+            4-byte ASNs as per RFC1997 style communities, a third field was
+            added to be able to signal an action without losing information
+            about either the actor or the target.
         </t>
         <t>
-            This document presents a set of examples on how the Large Community standard could be implemented by an operator to achieve various goals. It should however be noted that the Large Community standard is opaque, any recommendations made in this document may be ignored by the operator.
+            This document presents a set of examples on how the Large Community
+            standard could be implemented by an operator to achieve various
+            goals. It should however be noted that the Large Community standard
+            is opaque, any recommendations made in this document may be ignored
+            by the operator.
+        </t>
+    </section>
+
+    <section title="The Generic design pattern">
+        <t>
+            namespace: first 4 octets
+            target: second 4 octets
+            action: last 4 octets
+        </t>
+        <t>
+            if target is a private or reserved ASN: ...
+            if target is a globally unique ASN: ....
+        <t>
+            action can encode multiple aspects:
+                - location where to do something
+                - what to do:
+                    - prepend
+                    - not-export
+        </t>
+
+    </section>
+
+    <section title="IXP Route Server Use Case">
+        <t>
+            ...
         </t>
     </section>
 
     <section title="Security Considerations">
-       <t>TBD</t>
+        <t>
+            Security issues are not discussed in this memo.
+        </t>
    </section>
    
     <section title="IANA Considerations">
