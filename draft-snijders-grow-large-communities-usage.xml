@@ -10,171 +10,134 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-idr-large-community-00" ipr="trust200902">
-  <front>
-    <title abbrev="Large BGP Communities">Usage of Large BGP Communities</title>
+<rfc category="std" docName="draft-snijders-idr-large-communities-usage-00" ipr="trust200902">
+    <front>
+        <title>Usage of Large BGP Communities</title>
 
-    <author fullname="Job Snijders" initials="J." surname="Snijders">
-        <organization abbrev="NTT">NTT Communications</organization>
-        <address>
-            <postal>
-                <street>Theodorus Majofskistraat 100</street>
-                <code>1065 SZ</code>
-                <city>Amsterdam</city>
-                <country>NL</country>
-            </postal>
-            <email>job@ntt.net</email>
-        </address>
-    </author>
+        <author fullname="Job Snijders" initials="J." surname="Snijders">
+            <organization abbrev="NTT">NTT Communications</organization>
+            <address>
+                <postal>
+                    <street>Theodorus Majofskistraat 100</street>
+                    <code>1065 SZ</code>
+                    <city>Amsterdam</city>
+                    <country>NL</country>
+                </postal>
+                <email>job@ntt.net</email>
+            </address>
+        </author>
 
-    <author fullname="Brad" initials="D." surname="Dreisbach">
-        <organization abbrev="NTT">NTT Communications</organization>
-        <address>
-            <postal>
-                <city>Springfield<city>
-                <region>VA<region>
-                <country>USA</country>
-            </postal>
-            <email>bradd@ntt.net</email>
-        </address>
-    </author>
+        <author fullname="Martijn Schmidt" initials="M." surname="Schmidt">
+            <organization>i3D.net</organization>
+            <address>
+                <postal>
+                    <street>Rivium 1e Straat 1</street>
+                    <code>2909 LE</code>
+                    <city>Capelle aan den IJssel</city>
+                    <country>NL</country>
+                </postal>
+                <email>martijnschmidt@i3d.net</email>
+            </address>
+        </author>
 
-    <author fullname="Martijn Schmidt" initials="M." surname="Schmidt">
-        <organization>i3D.net</organization>
-        <address>
-            <postal>
-                <street>Rivium 1e Straat 1</street>
-                <code>2909 LE</code>
-                <city>Capelle aan den IJssel</city>
-                <country>NL</country>
-            </postal>
-            <email>martijnschmidt@i3d.net</email>
-        </address>
-    </author>
+        <date/>
 
-	<author fullname="Greg Hankins" initials="G." surname="Hankins">
-		<organization>Nokia</organization>
-		<address>
-			<postal>
-				<street>777 E. Middlefield Road</street>
-				<city>Mountain View</city>
-				<region>CA</region>
-				<code>94043</code>
-			<country>USA</country>
-			</postal>
-			<email>greg.hankins@nokia.com</email>
-		</address>
-	</author>
+        <area>Routing</area>
+        <workgroup>GROW</workgroup>
+        <keyword>BGP</keyword>
+        <keyword>communities</keyword>
 
-    <author fullname="Will Hargrave" initials="W." surname="Hargrave">
-        <organization>LONAP</organization>
-        <address>
-            <email>will@harg.net</email>
-        </address>
-    </author>
+        <abstract>
+            <t>
+                Examples and inspiration for operators on how to use Large BGP
+                Communities.
+            </t>
+        </abstract>
 
-    <date/>
+        <note title="Requirements Language">
+            <t>
+                The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+                "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in
+                this document are to be interpreted as described in
+                <xref target="RFC2119"/>.
+            </t>
+        </note>
 
-    <area>Routing</area>
-    <workgroup>GROW</workgroup>
-    <keyword>BGP</keyword>
-    <keyword>communities</keyword>
+    </front>
 
-    <abstract>
-        <t>
-            Examples and inspiration how to use large communities
-        </t>
-    </abstract>
+    <middle>
+        <section title="Introduction">
+            <t>
+                Large BGP Communities <xref target="I-D.ietf-idr-large-community"/> provide
+                a mechanism to signal opaque information between Autonomous
+                Systems.
 
-    <note title="Requirements Language">
-        <t>
-            The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-            "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in
-            this document are to be interpreted as described in
-            <xref target="RFC2119"/>.
-        </t>
-    </note>
+            </t>
+            <t>
+                This document presents a set of examples on how the Large Community
+                standard could be implemented by an operator to achieve various
+                goals. It should however be noted that the Large Community standard
+                is opaque, any recommendations made in this document may be ignored
+                by the operator.
+            </t>
+        </section>
 
-  </front>
-
-  <middle>
-    <section title="Introduction">
-        <t>
-            The traditional BGP Community Attribute standard <xref target="RFC1997"/>
-            has enjoyed wide adoption by Internet backbone operators, however
-            it is limited to two fields - each with room for a 2-Octet value.
-            With the amount of 4-Octet Autonomous System Numbers in the
-            default-free zone rapidly growing, draft-heitz-idr-large-community
-            was proposed to the working group to create feature parity between
-            2-Octet and 4-Octet ASNs. Besides allowing operators to specify two
-            4-byte ASNs as per RFC1997 style communities, a third field was
-            added to be able to signal an action without losing information
-            about either the actor or the target.
-        </t>
-        <t>
-            This document presents a set of examples on how the Large Community
-            standard could be implemented by an operator to achieve various
-            goals. It should however be noted that the Large Community standard
-            is opaque, any recommendations made in this document may be ignored
-            by the operator.
-        </t>
-    </section>
-
-    <section title="The Generic design pattern">
-        <t>
-            namespace: first 4 octets
-            target: second 4 octets
-            action: last 4 octets
-        </t>
-        <t>
-            if target is a private or reserved ASN: ...
-            if target is a globally unique ASN: ....
-        <t>
-            action can encode multiple aspects:
-                - location where to do something
-                - what to do:
+        <section title="The Generic design pattern">
+            <t>
+                namespace: first 4 octets
+                target: second 4 octets
+                action: last 4 octets
+            </t>
+            <t>
+                if target is a private or reserved ASN: ...
+                if target is a globally unique ASN: ....
+                <t>
+                    action can encode multiple aspects:
+                    - location where to do something
+                    - what to do:
                     - prepend
                     - not-export
-        </t>
+                </t>
 
-    </section>
+            </section>
 
-    <section title="IXP Route Server Use Case">
-        <t>
-            ...
-        </t>
-    </section>
+            <section title="IXP Route Server Use Case">
+                <t>
+                    ...
+                </t>
+            </section>
 
-    <section title="Security Considerations">
-        <t>
-            Security issues are not discussed in this memo.
-        </t>
-   </section>
-   
-    <section title="IANA Considerations">
-        <t>
-            None
-        </t>
-    </section>
+            <section title="Security Considerations">
+                <t>
+                    Security issues are not discussed in this memo.
+                </t>
+            </section>
 
-    <section title="Acknowledgements">
-        <t>
-            Thanks to ...
-        </t>
-    </section>
+            <section title="IANA Considerations">
+                <t>
+                    None
+                </t>
+            </section>
 
-  </middle>
+            <section title="Acknowledgements">
+                <t>
+                    Thanks to ...
+                </t>
+            </section>
 
-  <back>
-    <references title="Normative References">
-      <?rfc include="reference.RFC.1997"?>
-      <?rfc include="reference.RFC.2119"?>
-      <?rfc include="reference.RFC.7606"?>
-    </references>
-    <references title="Informative References">
-      <?rfc include="reference.RFC.7942"?>
-    </references>
+        </middle>
+
+        <back>
+            <references title="Normative References">
+                <?rfc include="reference.RFC.1997"?>
+                <?rfc include="reference.RFC.2119"?>
+                <?rfc include="reference.RFC.7606"?>
+                <?rfc include="reference.I-D.draft-ietf-idr-large-community-05"?>
+            </references>
+            <references title="Informative References">
+                <?rfc include="reference.RFC.7942"?>
+            </references>
 
 
-  </back>
-</rfc>
+        </back>
+    </rfc>
