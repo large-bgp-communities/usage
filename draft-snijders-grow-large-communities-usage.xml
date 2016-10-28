@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-snijders-idr-large-communities-usage-00" ipr="trust200902">
+<rfc category="std" docName="draft-snijders-grow-large-communities-usage-00" ipr="trust200902">
     <front>
         <title>Usage of Large BGP Communities</title>
 
@@ -68,26 +68,64 @@
     <middle>
         <section title="Introduction">
             <t>
-                Large BGP Communities <xref target="I-D.ietf-idr-large-community"/> provide
-                a mechanism to signal opaque information between Autonomous
-                Systems.
-
-            </t>
-            <t>
-                This document presents a set of examples on how the Large Community
-                standard could be implemented by an operator to achieve various
-                goals. It should however be noted that the Large Community standard
-                is opaque, any recommendations made in this document may be ignored
-                by the operator.
+                <xref target="I-D.ietf-idr-large-community">Large BGP Communities</xref>
+                provide a mechanism to signal opaque information between
+                Autonomous Systems. This document presents a set of examples on
+                how Large BGP Communities could be implemented by an operator
+                to achieve various goals.
             </t>
         </section>
 
-        <section title="The Generic design pattern">
+        <section title="The Generic Design Pattern">
             <t>
-                namespace: first 4 octets
-                target: second 4 octets
-                action: last 4 octets
+                In deployments of both BGP Communities <xref target="RFC1997"/>
+                and Large BGP Communities, two categories of Communities are
+                recognised:
+                <list style="symbols">
+                    <t>Informational Communities</t>
+                    <t>Action Communities</t>
+                </list>
+                For each context ideas are provided regarding the contents of
+                each of the three fields in Large BGP Communities.
             </t>
+            <t>
+                Throughout the document a topology of four Autonomous Systems
+                is used to illustrate the usage of Communities in the following
+                configuration:
+<figure align="center"><artwork><![CDATA[
+
+            AS 64496
+                |
+                |
+                |
+            AS 64497
+               /  \
+              /    \
+             /      \
+        AS 64498     \
+            |         |
+             `--- AS 64499
+]]></artwork></figure>
+            <section title="Informational Communities">
+                <t>
+                    Informational Communites serve as markers regarding the
+                    origin of the route announcement, the relation with the
+                    EBGP neighbor or for instance the intended propagation
+                    audience.
+                </t>
+            </section>
+
+            <section title="Action Communities">
+                <t>
+                    Action Communities are attached to routes to request
+                    non-default behaviour in an adjacent Autonomous System. For
+                    instance, Action Communities are used to change the route's
+                    propagation characteristics, the route's LOCAL_PREF value
+                    or the amount of AS_PATH prepends that should be added.
+                </t>
+            </section>
+        </section>
+
             <t>
                 if target is a private or reserved ASN: ...
                 if target is a globally unique ASN: ....
@@ -101,21 +139,16 @@
 
             </section>
 
-            <section title="IXP Route Server Use Case">
-                <t>
-                    ...
-                </t>
-            </section>
-
             <section title="Security Considerations">
                 <t>
-                    Security issues are not discussed in this memo.
+                    Network operators should note the recommendations in
+                    Section 11 of BGP Operations and Security <xref target="RFC7454"/>.
                 </t>
             </section>
 
             <section title="IANA Considerations">
                 <t>
-                    None
+                    None.
                 </t>
             </section>
 
@@ -132,6 +165,7 @@
                 <?rfc include="reference.RFC.1997"?>
                 <?rfc include="reference.RFC.2119"?>
                 <?rfc include="reference.RFC.7606"?>
+                <?rfc include="reference.RFC.7454"?>
                 <?rfc include="reference.I-D.draft-ietf-idr-large-community-05"?>
             </references>
             <references title="Informative References">
