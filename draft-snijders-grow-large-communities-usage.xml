@@ -276,8 +276,8 @@
                         <ttcol align='center'>Large BGP Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:40:2914</c><c>Do not export route to AS 2914</c>
-                        <c>64497:40:3356</c><c>Do not export route to AS 3356</c>
-                        <c>64497:40:7018</c><c>Do not export route to AS 7018</c>
+                        <c>64497:40:7018</c><c>Do not export route to AS 3356</c>
+                        <c>64497:40:64496</c><c>Do not export route to AS 64496</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
                             Communties to limit propagation of routes based on
@@ -327,8 +327,8 @@
                         <ttcol align='center'>Large BGP Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:42:2914</c><c>Prepend 64497 once on export to AS 2914</c>
-                        <c>64497:42:3356</c><c>Prepend 64497 once on export to AS 3356</c>
                         <c>64497:42:7018</c><c>Prepend 64497 once on export to AS 7018</c>
+                        <c>64497:42:64496</c><c>Prepend 64497 once on export to AS 64496</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
                             Communties to trigger prepending of the AS_PATH
