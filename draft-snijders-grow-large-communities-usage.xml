@@ -79,7 +79,7 @@
             <t>
                 The opaque nature of Large BGP Communities allows for rapid
                 deployment of new features or changes to the product. Operators
-                are encouraged to publically publish an up to date version of
+                are encouraged to publicly publish an up to date version of
                 their routing policy in which they document what each Large BGP
                 Community means.
             </t>
@@ -402,8 +402,6 @@
             </references>
 -->
 
-<!--
-        
 
         </back>
     </rfc>
