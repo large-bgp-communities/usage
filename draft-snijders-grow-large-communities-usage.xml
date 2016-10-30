@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-snijders-grow-large-communities-usage-00" ipr="trust200902">
+<rfc category="info" docName="draft-snijders-grow-large-communities-usage-00" ipr="trust200902">
     <front>
         <title>Usage of Large BGP Communities</title>
 
