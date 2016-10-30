@@ -108,7 +108,7 @@
                 is used to illustrate the usage of Communities in the following
                 configuration:
                 <figure align="center"><artwork><![CDATA[
-        AS 64496
+        AS 65551
             |
             ^
             |
@@ -120,7 +120,7 @@
        |        | 
        `<->- AS 64499
 ]]></artwork></figure>
-                AS 64497 obtains transit services from AS 64496. AS 64497
+                AS 64497 obtains transit services from AS 65551. AS 64497
                 provides transit services to both AS 64498 and AS 64499. AS
                 64498 and AS 64499 maintain a peering relation in which they
                 only exchange their customer routes. 
@@ -277,7 +277,7 @@
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:40:2914</c><c>Do not export route to AS 2914</c>
                         <c>64497:40:7018</c><c>Do not export route to AS 3356</c>
-                        <c>64497:40:64496</c><c>Do not export route to AS 64496</c>
+                        <c>64497:40:65551</c><c>Do not export route to AS 65551</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
                             Communties to limit propagation of routes based on
@@ -328,7 +328,7 @@
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:42:2914</c><c>Prepend 64497 once on export to AS 2914</c>
                         <c>64497:42:7018</c><c>Prepend 64497 once on export to AS 7018</c>
-                        <c>64497:42:64496</c><c>Prepend 64497 once on export to AS 64496</c>
+                        <c>64497:42:65551</c><c>Prepend 64497 once on export to AS 65551</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
                             Communties to trigger prepending of the AS_PATH
