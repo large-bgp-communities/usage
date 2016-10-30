@@ -76,6 +76,13 @@
                 in Operational Communities such as <eref target="http://nanog.net">NANOG</eref>
                 and <eref target="http://nlnog.net">NLNOG</eref>.
             </t>
+            <t>
+                The opaque nature of Large BGP Communities allows for rapid
+                deployment of new features or changes to the product. Operators
+                are encouraged to publically publish an up to date version of
+                their routing policy in which they document what each Large BGP
+                Community means.
+            </t>
         </section>
 
         <section title="The Generic Design Pattern">
