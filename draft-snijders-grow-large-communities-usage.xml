@@ -360,12 +360,86 @@
                         </postamble>
                     </texttable>
                 </section>
-
             </section>
 
-            <section title="Region-Specific LOCAL_PREFERENCE">
+            <section title="Location based manipulation of LOCAL_PREF">
                 <t>
-                    To be filled in.
+                    In some cases, it can be desirable for an autonomous system
+                    to allow adjacent Autonomous Systems to directly influence
+                    the degree of preference associated with a route, usually
+                    expressed within the LOCAL_PREF attribute.
+                </t>
+                <t>
+                    Furthermore, in the case of large networks spanning
+                    significant geography, it is often also useful to be able
+                    to extend this capability and scope its effect to a
+                    geographic region.  This is a more powerful mechanism than
+                    AS_PATH prepending, but since degree of preference
+                    determines BGP route selection and thus onward
+                    advertisement, it can also be self-limiting in its scope.
+                </t>
+                <t>
+                    Since the LOCAL_PREF attribute which influences degree of
+                    preference is locally significant within each autonomous
+                    system, it is not usually practical or useful to compare
+                    LOCAL_PREF attribute values between autonomous systems.
+                    Instead it can be useful to classify the major types of
+                    route likely to exist within an autonomous system's routing
+                    hierarchy and provide an ability to set one's route to that
+                    preference:
+                    <list style="symbols">
+                        <t>
+                            A qualified customer route. Usually the highest preference.
+                        </t>
+                        <t>
+                            A peer, or network-share, route. A co-operating
+                            network provider engaged in a partnership for
+                            customer coverage ("peering").
+                        </t>
+                        <t>
+                            A last resort, or backup route.
+                        </t>
+                    </list>
+                </t>
+                <t>
+                    It is entirely possible that some providers may have more
+                    classes of route preference but it is possible to codify
+                    both the route preference class and the regional scope
+                    within the Local Data fields of the Large Community
+                    attribute.
+                </t>
+                <t>
+                    For example, AS64497 might establish the following function
+                    identifiers to set route preference class, which could
+                    allow pairing with a location or peer-based operand to
+                    determine scope.
+                </t>
+                <texttable title="Action: Preference Function Identifiers" anchor='action_pref_func'>
+                    <ttcol align='center'>Function</ttcol>
+                    <ttcol align='left'>Preference Class</ttcol>
+                    <c>10</c><c>Qualified customer route. Highest preference.</c>
+                    <c>15</c><c>Peering partner. Median preference.</c>
+                    <c>19</c><c>Route of last resort. Lowest preference.</c>
+                </texttable>
+                <t>
+                    Once established, these route preference setting functions
+                    can be linked with a scoping operand such as per-peer or
+                    per-location based identifiers in order to provide
+                    AS64497's customers with a comprehensive and rich toolset
+                    to influence route preference.
+                </t>
+                <texttable title="Action: Regional Preference Communities" anchor='action_pref_region'>
+                    <ttcol align='center'>Large BGP Community</ttcol>
+                    <ttcol align='left'>Meaning</ttcol>
+                    <c>64497:8:528</c><c>Set as peer route in Netherlands</c>
+                    <c>64497:9:840</c><c>Set as backup route in United States of America</c>
+                </texttable>
+                <t>
+                    Since the degree of preference influences BGP best path
+                    selection (which in turn influences onward route
+                    propagation) Operators should take special care with a
+                    traffic engineering tool such as location based local
+                    preference influence (<xref target="RFC4264">BGP Wedgies</xref>).
                 </t>
             </section>
         </section>
@@ -385,7 +459,9 @@
 
         <section title="Acknowledgements">
             <t>
-                Thanks to ...
+                The authors would like to gratefully acknowledge the insightful
+                comments, contributions, critique and support from John
+                Heasley, Adam Chappell and Jonathan Stewart.
             </t>
         </section>
 
@@ -396,6 +472,7 @@
             <?rfc include="reference.RFC.1997"?>
             <?rfc include="reference.RFC.2119"?>
             <?rfc include="reference.RFC.7454"?>
+            <?rfc include="reference.RFC.4264"?>
             <?rfc include="reference.I-D.draft-ietf-idr-large-community-06"?>
         </references>
 <!--
