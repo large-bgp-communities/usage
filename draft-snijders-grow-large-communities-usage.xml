@@ -263,7 +263,7 @@
                 <t>
                     As part of the commercial agreement between AS 64497 and AS
                     64498, AS 64497 might offer AS 64498 certain BGP Traffic
-                    Engineering features such as selectively not exporting
+                    Engineering features such as selectively not export
                     routes learned from 64498 to certain EBGP neighbors of AS
                     64497.
                 </t>
@@ -277,7 +277,7 @@
                         <ttcol align='center'>Large BGP Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:4:2914</c><c>Do not export route to AS 2914</c>
-                        <c>64497:4:7018</c><c>Do not export route to AS 3356</c>
+                        <c>64497:4:7018</c><c>Do not export route to AS 7018</c>
                         <c>64497:4:65551</c><c>Do not export route to AS 65551</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
@@ -344,7 +344,8 @@
                         prepending of the AS_PATH on propagation of routes to
                         on any EBGP neighbor's interconnection in the
                         geographical entity listed in the second Local Data
-                        field. This example follows the ISO 3166-1 numeric encoding.
+                        field. This example follows the ISO 3166-1 numeric
+                        regions codes in the Local Data 2 field.
                     </t>
                     <texttable title="Action: Prepend in Region" anchor='action_region_prepend'>
                         <ttcol align='center'>Large BGP Community</ttcol>
