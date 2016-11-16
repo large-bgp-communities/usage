@@ -432,8 +432,8 @@
                 <texttable title="Action: Regional Preference Communities" anchor='action_pref_region'>
                     <ttcol align='center'>Large BGP Community</ttcol>
                     <ttcol align='left'>Meaning</ttcol>
-                    <c>64497:8:528</c><c>Set as peer route in Netherlands</c>
-                    <c>64497:9:840</c><c>Set as backup route in United States of America</c>
+                    <c>64497:15:528</c><c>Set as peer route in Netherlands</c>
+                    <c>64497:19:840</c><c>Set as backup route in United States of America</c>
                 </texttable>
                 <t>
                     Since the degree of preference influences BGP best path
