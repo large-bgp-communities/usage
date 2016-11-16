@@ -10,7 +10,7 @@ Expires: May 20, 2017                                            i3D.net
 
 
                      Usage of Large BGP Communities
-             draft-snijders-grow-large-communities-usage-00
+             draft-snijders-grow-large-communities-usage-01
 
 Abstract
 
@@ -510,8 +510,8 @@ Internet-Draft       Usage of Large BGP Communities        November 2016
    |     Large BGP      | Meaning                                      |
    |     Community      |                                              |
    +--------------------+----------------------------------------------+
-   |    64497:8:528     | Set as peer route in Netherlands             |
-   |    64497:9:840     | Set as backup route in United States of      |
+   |    64497:15:528    | Set as peer route in Netherlands             |
+   |    64497:19:840    | Set as backup route in United States of      |
    |                    | America                                      |
    +--------------------+----------------------------------------------+
 
