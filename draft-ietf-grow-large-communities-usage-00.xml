@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<rfc category="info" docName="draft-ietf-grow-large-communities-usage-00" ipr="trust200902">
+    <front>
+        <title>Usage of Large BGP Communities</title>
+
+        <author fullname="Job Snijders" initials="J." surname="Snijders">
+            <organization abbrev="NTT">NTT Communications</organization>
+            <address>
+                <postal>
+                    <street>Theodorus Majofskistraat 100</street>
+                    <code>1065 SZ</code>
+                    <city>Amsterdam</city>
+                    <country>NL</country>
+                </postal>
+                <email>job@ntt.net</email>
+            </address>
+        </author>
+
+        <author fullname="Martijn Schmidt" initials="M." surname="Schmidt">
+            <organization>i3D.net</organization>
+            <address>
+                <postal>
+                    <street>Rivium 1e Straat 1</street>
+                    <code>2909 LE</code>
+                    <city>Capelle aan den IJssel</city>
+                    <country>NL</country>
+                </postal>
+                <email>martijnschmidt@i3d.net</email>
+            </address>
+        </author>
+
+        <date/>
+
+        <area>Routing</area>
+        <workgroup>GROW</workgroup>
+        <keyword>BGP</keyword>
+        <keyword>communities</keyword>
+
+        <abstract>
+            <t>
+                Examples and inspiration for operators on how to use Large BGP
+                Communities.
+            </t>
+        </abstract>
+
+        <note title="Requirements Language">
+            <t>
+                The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+                "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in
+                this document are to be interpreted as described in
+                <xref target="RFC2119"/>.
+            </t>
+        </note>
+
+    </front>
+
+    <middle>
+        <section title="Introduction">
+            <t>
+                <xref target="I-D.ietf-idr-large-community">Large BGP Communities</xref>
+                provide a mechanism to signal opaque information between
+                Autonomous Systems. This document presents a set of examples on
+                how Large BGP Communities could be implemented by an operator
+                to achieve various goals. This document draws from experience
+                in Operational Communities such as <eref target="http://nanog.net">NANOG</eref>
+                and <eref target="http://nlnog.net">NLNOG</eref>.
+            </t>
+            <t>
+                The opaque nature of Large BGP Communities allows for rapid
+                deployment of new features or changes to the product. Operators
+                are encouraged to publicly publish an up to date version of
+                their routing policy in which they document what each Large BGP
+                Community means.
+            </t>
+        </section>
+
+        <section title="The Generic Design Pattern">
+            <t>
+                Large BGP Communities are composed of a 4-octet Global
+                Administrator field followed by two 4-octet Local Data fields.
+                The design pattern described in this document uses a
+                "ASN:Function:Parameter"-approach to fill the three fields.
+            </t>
+            <t>
+                In deployments of both BGP Communities <xref target="RFC1997"/>
+                and Large BGP Communities, two categories of Communities are
+                recognised:
+                <list style="symbols">
+                    <t>Informational Communities</t>
+                    <t>Action Communities</t>
+                </list>
+                For each context ideas are provided regarding the contents of
+                each of the three fields in Large BGP Communities.
+            </t>
+            <t>
+                Throughout the document a topology of four Autonomous Systems
+                is used to illustrate the usage of Communities in the following
+                configuration:
+                <figure align="center"><artwork><![CDATA[
+        AS 65551
+            |
+            ^
+            |
+        AS 64497
+          /  \
+         ^    \
+        /      ^
+   AS 64498     \
+       |        | 
+       `<->- AS 64499
+]]></artwork></figure>
+                AS 64497 obtains transit services from AS 65551. AS 64497
+                provides transit services to both AS 64498 and AS 64499. AS
+                64498 and AS 64499 maintain a peering relation in which they
+                only exchange their customer routes. 
+            </t>
+            <section title="Informational Communities">
+                <t>
+                    Informational Communites serve as markers regarding the
+                    origin of the route announcement, the relation with the
+                    EBGP neighbor or for instance the intended propagation
+                    audience. Informational Communities also assist in network
+                    operations such as debugging.
+                </t>
+                <t>
+                    The Global Administrator field is set to the ASN which is
+                    marking the routes with the Informational Communities. As
+                    an example: on a route which AS 64497 announces to AS
+                    64498, AS 64497 might add the Large BGP Community
+                    64497:100:31 to signal to AS 64498 that the route was
+                    learned in the Netherlands.
+                </t>
+                <t>
+                    In general the intended audience of Informational
+                    Communities are downstream networks, but any adjacent
+                    Autonomous System could benefit from receiving these
+                    communities.
+                </t>
+            </section>
+
+            <section title="Action Communities">
+                <t>
+                    Action Communities are attached to routes to request
+                    non-default behaviour in an adjacent Autonomous System. For
+                    instance, Action Communities are used to change the route's
+                    propagation characteristics, the route's LOCAL_PREF value
+                    or the amount of AS_PATH prepends that should be added when
+                    exporting or importing a route.
+                </t>
+                <t>
+                    The Global Administrator field is set to the ASN which is
+                    expected to perform a non-default action upon receiving the
+                    route. For instance, if AS 64499 would want to request AS
+                    64497 to lower the LOCAL_PREFERENCE below the default, AS
+                    64499 could tag the route with 64497:20:50.
+                </t>
+                <t>
+                    In general the intended audience of Action Communities is
+                    an upstream provider.
+                </t>
+            </section>
+        </section>
+
+        <section title="Examples of Informational Communities">
+            <section title="Location">
+                <t>
+                    AS 64497 can inform its downstream networks about the
+                    geographical entity where AS 64497 learned a route by
+                    marking the route with Large BGP Communities following one
+                    or a combination of the following schemes.
+                </t>
+                <section title="An ISO 3166-1 numeric function">
+                    <t>
+                        AS 64497 could assign a value of 1 to the first Local
+                        Data field to designate the function of the parameter
+                        in the second Local Data field as ISO-3166-1 numeric
+                        country identifiers. 
+                    </t>
+                    <texttable title="Information: ISO 3166-1" anchor='info_iso3166'>
+                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='left'>Meaning</ttcol>
+                        <c>64497:1:528</c><c>Route learned in Netherlands</c>
+                        <c>64497:1:392</c><c>Route learned in Japan</c>
+                        <c>64497:1:840</c><c>Route learned in United States of America</c>
+                        <postamble>
+                            Example documentation for AS 64497 using
+                            Informational Communties describing the origin of
+                            routes using ISO 3166-1 numeric identifiers.
+                        </postamble>
+                    </texttable>
+                </section>
+                <section title="An UNSD region function">
+                    <t>
+                        AS 64497 could assign a value of 2 to the first Local
+                        Data field to designate the function of the parameter
+                        in the second Local Data field as an identifier for
+                        the macro geographical (continental) regions, geographical
+                        sub-regions, or selected economic and other groupings
+                        following a set of published identifiers by the 
+                        <eref target="http://unstats.un.org/unsd/methods/m49/m49regin.htm">United
+                            Nations Statistics Division</eref>.
+                    </t>
+                    <texttable title="Information: Regions" anchor='info_regions'>
+                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='left'>Meaning</ttcol>
+                        <c>64497:2:2</c><c>Route learned in Africa</c>
+                        <c>64497:2:9</c><c>Route learned in Oceania</c>
+                        <c>64497:2:145</c><c>Route learned in Western Asia</c>
+                        <c>64497:2:150</c><c>Route learned in Europe</c>
+                        <postamble>
+                            Example documentation for AS 64497 using
+                            Informational Communties describing the origin of
+                            routes using numeric identifiers provided by the UN
+                            Statistics Division.
+                        </postamble>
+                    </texttable>
+                </section>
+            </section>
+            <section title="Relation">
+                <t>
+                    AS 64497 could assign a value of 3 to the first Local Data
+                    field to designate that the second Local Data field
+                    contains an identifier showing the relation with the EBGP
+                    neighbor from whom the route was received.
+                </t>
+                <texttable title="Information: Relation" anchor='info_relation'>
+                    <ttcol align='center'>Large BGP Community</ttcol>
+                    <ttcol align='left'>Meaning</ttcol>
+                    <c>64497:3:1</c><c>Route learned from a customer</c>
+                    <c>64497:3:2</c><c>Route learned from a peering partner</c>
+                    <c>64497:3:3</c><c>Route learned from an upstream provider</c>
+                    <postamble>
+                        Example documentation for AS 64497 using
+                        Informational Communties describing the relation
+                        with the ASN from which the route was received.
+                    </postamble>
+                </texttable>
+            </section>
+            <section title="Combining Informational Communities">
+                <t>
+                    Multiple Informational Communities can be tagged on a
+                    route, for example: a route learned in the Netherlands from
+                    a customer can contain both 64497:1:528 and 64497:2:150
+                    and 64497:3:1.
+                </t>
+            </section>
+        </section>
+
+        <section title="Examples of Action Communities">
+            <section title="Selective NO_EXPORT">
+                <t>
+                    As part of the commercial agreement between AS 64497 and AS
+                    64498, AS 64497 might offer AS 64498 certain BGP Traffic
+                    Engineering features such as selectively not exporting
+                    routes learned from 64498 to certain EBGP neighbors of AS
+                    64497.
+                </t>
+                <section title="Peer ASN Based Selective NO_EXPORT">
+                    <t>
+                        AS 64497 might assign function identifier 4 to allow
+                        preventing propagation of routes to the ASN listed in
+                        the second Local Data field.
+                    </t>
+                    <texttable title="Action: Peer ASN NO_EXPORT" anchor='action_peer_no_export'>
+                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='left'>Meaning</ttcol>
+                        <c>64497:4:2914</c><c>Do not export route to AS 2914</c>
+                        <c>64497:4:7018</c><c>Do not export route to AS 3356</c>
+                        <c>64497:4:65551</c><c>Do not export route to AS 65551</c>
+                        <postamble>
+                            Example documentation for AS 64497 offering Action
+                            Communties to limit propagation of routes based on
+                            the Peer ASN described in the third field.
+                        </postamble>
+                    </texttable>
+                </section>
+                <section title="Location Based Selective NO_EXPORT">
+                    <t>
+                        AS 64497 might assign function identifier 5 to allow
+                        its customers to request selectively not exporting
+                        routes on EBGP sessions within a certain geographical
+                        area.  This example follows the ISO 3166-1 numeric
+                        encoding.
+                    </t>
+                    <texttable title="Action: NO_EXPORT in Region" anchor='action_region_no_export'>
+                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='left'>Meaning</ttcol>
+                        <c>64497:5:528</c><c>Do not export to EBGP neighbors in the Netherlands</c>
+                        <c>64497:5:392</c><c>Do not export to EBGP neighbors in Japan</c>
+                        <c>64497:5:840</c><c>Do not export to EBGP neighbors in United States of America</c>
+                        <postamble>
+                            Example documentation for AS 64497 offering Action
+                            Communties to trigger NO_EXPORT on routes only when
+                            propagating the route to a certain geographical
+                            region.
+                        </postamble>
+                    </texttable>
+                </section>
+            </section>
+
+            <section title="Selective AS_PATH Prepending">
+                <t>
+                    As part of the commercial agreement between AS 64497 and AS
+                    64498, AS 64497 might offer AS 64498 certain BGP Traffic
+                    Engineering features such as selectively prepending the
+                    AS_PATH with 64497's ASN to certain EBGP neighbors of AS
+                    64497.
+                </t>
+                <section title="Peer ASN Based Selective AS_PATH Prepending">
+                    <t>
+                        AS 64497 might assign function identifier 6 to allow
+                        prepending the AS_PATH on propagation of routes to the
+                        ASN listed in the second Local Data field.
+                    </t>
+                    <texttable title="Action: Prepend to Peer ASN " anchor='action_peer_prepend'>
+                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='left'>Meaning</ttcol>
+                        <c>64497:6:2914</c><c>Prepend 64497 once on export to AS 2914</c>
+                        <c>64497:6:7018</c><c>Prepend 64497 once on export to AS 7018</c>
+                        <c>64497:6:65551</c><c>Prepend 64497 once on export to AS 65551</c>
+                        <postamble>
+                            Example documentation for AS 64497 offering Action
+                            Communties to trigger prepending of the AS_PATH
+                            only when propagating the route to a certain Peer
+                            ASN.
+                        </postamble>
+                    </texttable>
+                </section>
+                <section title="Location Based Selective AS_PATH Prepending">
+                    <t>
+                        AS 64497 might assign function identifier 7 to allow
+                        prepending of the AS_PATH on propagation of routes to
+                        on any EBGP neighbor's interconnection in the
+                        geographical entity listed in the second Local Data
+                        field. This example follows the ISO 3166-1 numeric encoding.
+                    </t>
+                    <texttable title="Action: Prepend in Region" anchor='action_region_prepend'>
+                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='left'>Meaning</ttcol>
+                        <c>64497:7:528</c><c>Prepend once to EBGP neighbors in the Netherlands</c>
+                        <c>64497:7:392</c><c>Prepend once to EBGP neighbors in Japan</c>
+                        <c>64497:7:840</c><c>Prepend once to EBGP neighbors in United States of America</c>
+                        <postamble>
+                            Example documentation for AS 64497 offering Action
+                            Communties to trigger prepending of the AS_PATH
+                            only when propagating the route to a certain
+                            geographical region.
+                        </postamble>
+                    </texttable>
+                </section>
+
+            </section>
+
+            <section title="Region-Specific LOCAL_PREFERENCE">
+                <t>
+                    To be filled in.
+                </t>
+            </section>
+        </section>
+
+        <section title="Security Considerations">
+            <t>
+                Network operators should note the recommendations in
+                Section 11 of BGP Operations and Security <xref target="RFC7454"/>.
+            </t>
+        </section>
+
+        <section title="IANA Considerations">
+            <t>
+                None.
+            </t>
+        </section>
+
+        <section title="Acknowledgements">
+            <t>
+                Thanks to ...
+            </t>
+        </section>
+
+    </middle>
+
+    <back>
+        <references title="Normative References">
+            <?rfc include="reference.RFC.1997"?>
+            <?rfc include="reference.RFC.2119"?>
+            <?rfc include="reference.RFC.7454"?>
+            <?rfc include="reference.I-D.draft-ietf-idr-large-community-06"?>
+        </references>
+<!--
+            <references title="Informative References">
+            </references>
+-->
+
+
+        </back>
+    </rfc>
