@@ -12,7 +12,7 @@
 <?rfc subcompact="no"?>
 <rfc category="info" docName="draft-ietf-grow-large-communities-usage-01" ipr="trust200902">
     <front>
-        <title>Usage of Large BGP Communities</title>
+        <title>Usage of BGP Large Communities</title>
 
         <author fullname="Job Snijders" initials="J." surname="Snijders">
             <organization abbrev="NTT">NTT Communications</organization>
@@ -50,7 +50,7 @@
 
         <abstract>
             <t>
-                Examples and inspiration for operators on how to use Large BGP
+                Examples and inspiration for operators on how to use BGP Large
                 Communities.
             </t>
         </abstract>
@@ -69,40 +69,40 @@
     <middle>
         <section title="Introduction">
             <t>
-                <xref target="I-D.ietf-idr-large-community">Large BGP Communities</xref>
+                <xref target="I-D.ietf-idr-large-community">BGP Large Communities</xref>
                 provide a mechanism to signal opaque information between
                 Autonomous Systems. This document presents a set of examples on
-                how Large BGP Communities could be implemented by an operator
+                how BGP Large Communities could be implemented by an operator
                 to achieve various goals. This document draws from experience
                 in Operational Communities such as <eref target="http://nanog.net">NANOG</eref>
                 and <eref target="http://nlnog.net">NLNOG</eref>.
             </t>
             <t>
-                The opaque nature of Large BGP Communities allows for rapid
+                The opaque nature of BGP Large Communities allows for rapid
                 deployment of new features or changes to the product. Operators
                 are encouraged to publicly publish an up to date version of
-                their routing policy in which they document what each Large BGP
+                their routing policy in which they document what each BGP Large
                 Community means.
             </t>
         </section>
 
         <section title="The Generic Design Pattern">
             <t>
-                Large BGP Communities are composed of a 4-octet Global
+                BGP Large Communities are composed of a 4-octet Global
                 Administrator field followed by two 4-octet Local Data fields.
                 The design pattern described in this document uses a
                 "ASN:Function:Parameter"-approach to fill the three fields.
             </t>
             <t>
                 In deployments of both BGP Communities <xref target="RFC1997"/>
-                and Large BGP Communities, two categories of Communities are
+                and BGP Large Communities, two categories of Communities are
                 recognised:
                 <list style="symbols">
                     <t>Informational Communities</t>
                     <t>Action Communities</t>
                 </list>
                 For each context ideas are provided regarding the contents of
-                each of the three fields in Large BGP Communities.
+                each of the three fields in BGP Large Communities.
             </t>
             <t>
                 Throughout the document a topology of four Autonomous Systems
@@ -138,7 +138,7 @@
                     The Global Administrator field is set to the ASN which is
                     marking the routes with the Informational Communities. As
                     an example: on a route which AS 64497 announces to AS
-                    64498, AS 64497 might add the Large BGP Community
+                    64498, AS 64497 might add the BGP Large Community
                     64497:100:31 to signal to AS 64498 that the route was
                     learned in the Netherlands.
                 </t>
@@ -178,7 +178,7 @@
                 <t>
                     AS 64497 can inform its downstream networks about the
                     geographical entity where AS 64497 learned a route by
-                    marking the route with Large BGP Communities following one
+                    marking the route with BGP Large Communities following one
                     or a combination of the following schemes.
                 </t>
                 <section title="An ISO 3166-1 numeric function">
@@ -189,7 +189,7 @@
                         country identifiers. 
                     </t>
                     <texttable title="Information: ISO 3166-1" anchor='info_iso3166'>
-                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:1:528</c><c>Route learned in Netherlands</c>
                         <c>64497:1:392</c><c>Route learned in Japan</c>
@@ -213,7 +213,7 @@
                             Nations Statistics Division</eref>.
                     </t>
                     <texttable title="Information: Regions" anchor='info_regions'>
-                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:2:2</c><c>Route learned in Africa</c>
                         <c>64497:2:9</c><c>Route learned in Oceania</c>
@@ -236,7 +236,7 @@
                     neighbor from whom the route was received.
                 </t>
                 <texttable title="Information: Relation" anchor='info_relation'>
-                    <ttcol align='center'>Large BGP Community</ttcol>
+                    <ttcol align='center'>BGP Large Community</ttcol>
                     <ttcol align='left'>Meaning</ttcol>
                     <c>64497:3:1</c><c>Route learned from a customer</c>
                     <c>64497:3:2</c><c>Route learned from a peering partner</c>
@@ -274,7 +274,7 @@
                         the second Local Data field.
                     </t>
                     <texttable title="Action: Peer ASN NO_EXPORT" anchor='action_peer_no_export'>
-                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:4:2914</c><c>Do not export route to AS 2914</c>
                         <c>64497:4:7018</c><c>Do not export route to AS 7018</c>
@@ -295,7 +295,7 @@
                         encoding.
                     </t>
                     <texttable title="Action: NO_EXPORT in Region" anchor='action_region_no_export'>
-                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:5:528</c><c>Do not export to EBGP neighbors in the Netherlands</c>
                         <c>64497:5:392</c><c>Do not export to EBGP neighbors in Japan</c>
@@ -325,7 +325,7 @@
                         ASN listed in the second Local Data field.
                     </t>
                     <texttable title="Action: Prepend to Peer ASN " anchor='action_peer_prepend'>
-                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:6:2914</c><c>Prepend 64497 once on export to AS 2914</c>
                         <c>64497:6:7018</c><c>Prepend 64497 once on export to AS 7018</c>
@@ -348,7 +348,7 @@
                         regions codes in the Local Data 2 field.
                     </t>
                     <texttable title="Action: Prepend in Region" anchor='action_region_prepend'>
-                        <ttcol align='center'>Large BGP Community</ttcol>
+                        <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Meaning</ttcol>
                         <c>64497:7:528</c><c>Prepend once to EBGP neighbors in the Netherlands</c>
                         <c>64497:7:392</c><c>Prepend once to EBGP neighbors in Japan</c>
@@ -430,7 +430,7 @@
                     to influence route preference.
                 </t>
                 <texttable title="Action: Regional Preference Communities" anchor='action_pref_region'>
-                    <ttcol align='center'>Large BGP Community</ttcol>
+                    <ttcol align='center'>BGP Large Community</ttcol>
                     <ttcol align='left'>Meaning</ttcol>
                     <c>64497:15:528</c><c>Set as peer route in Netherlands</c>
                     <c>64497:19:840</c><c>Set as backup route in United States of America</c>
