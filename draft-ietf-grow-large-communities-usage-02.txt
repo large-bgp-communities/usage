@@ -234,7 +234,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
     |     64497:1:840     | Route learned in United States of America |
     +---------------------+-------------------------------------------+
 
-     Example documentation for AS 64497 using Informational Communties
+    Example documentation for AS 64497 using Informational Communities
    describing the origin of routes using ISO 3166-1 numeric identifiers.
 
                      Table 1: Information: ISO 3166-1
@@ -257,7 +257,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
           |     64497:2:150     | Route learned in Europe       |
           +---------------------+-------------------------------+
 
-     Example documentation for AS 64497 using Informational Communties
+    Example documentation for AS 64497 using Informational Communities
    describing the origin of routes using numeric identifiers provided by
                         the UN Statistics Division.
 
@@ -290,7 +290,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
      |      64497:3:3      | Route learned from an upstream provider |
      +---------------------+-----------------------------------------+
 
-     Example documentation for AS 64497 using Informational Communties
+    Example documentation for AS 64497 using Informational Communities
        describing the relation with the ASN from which the route was
                                  received.
 
@@ -325,7 +325,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
          |    64497:4:65551    | Do not export route to AS 65551 |
          +---------------------+---------------------------------+
 
-     Example documentation for AS 64497 offering Action Communties to
+     Example documentation for AS 64497 offering Action Communities to
     limit propagation of routes based on the Peer ASN described in the
                                third field.
 
@@ -356,7 +356,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
    |                  | States of America                              |
    +------------------+------------------------------------------------+
 
-     Example documentation for AS 64497 offering Action Communties to
+     Example documentation for AS 64497 offering Action Communities to
      trigger NO_EXPORT on routes only when propagating the route to a
                        certain geographical region.
 
@@ -402,7 +402,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
     |    64497:6:65551    | Prepend 64497 once on export to AS 65551 |
     +---------------------+------------------------------------------+
 
-     Example documentation for AS 64497 offering Action Communties to
+     Example documentation for AS 64497 offering Action Communities to
    trigger prepending of the AS_PATH only when propagating the route to
                             a certain Peer ASN.
 
@@ -427,7 +427,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
    |                  | States of America                              |
    +------------------+------------------------------------------------+
 
-     Example documentation for AS 64497 offering Action Communties to
+     Example documentation for AS 64497 offering Action Communities to
    trigger prepending of the AS_PATH only when propagating the route to
                       a certain geographical region.
 
@@ -535,7 +535,7 @@ Internet-Draft       Usage of BGP Large Communities         January 2017
 
    The authors would like to gratefully acknowledge the insightful
    comments, contributions, critique and support from John Heasley, Adam
-   Chappell and Jonathan Stewart.
+   Chappell, Jonathan Stewart, and Will Hargrave.
 
 8.  References
 
