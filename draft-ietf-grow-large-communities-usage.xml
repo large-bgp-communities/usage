@@ -474,7 +474,7 @@
             <?rfc include="reference.RFC.2119"?>
             <?rfc include="reference.RFC.7454"?>
             <?rfc include="reference.RFC.4264"?>
-            <?rfc include="reference.I-D.draft-ietf-idr-large-community-11"?>
+            <?rfc include="reference.I-D.draft-ietf-idr-large-community-12"?>
         </references>
 <!--
             <references title="Informative References">
