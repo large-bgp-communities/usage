@@ -196,7 +196,7 @@
                         <c>64497:1:840</c><c>Route learned in United States of America</c>
                         <postamble>
                             Example documentation for AS 64497 using
-                            Informational Communties describing the origin of
+                            Informational Communities describing the origin of
                             routes using ISO 3166-1 numeric identifiers.
                         </postamble>
                     </texttable>
@@ -221,7 +221,7 @@
                         <c>64497:2:150</c><c>Route learned in Europe</c>
                         <postamble>
                             Example documentation for AS 64497 using
-                            Informational Communties describing the origin of
+                            Informational Communities describing the origin of
                             routes using numeric identifiers provided by the UN
                             Statistics Division.
                         </postamble>
@@ -243,7 +243,7 @@
                     <c>64497:3:3</c><c>Route learned from an upstream provider</c>
                     <postamble>
                         Example documentation for AS 64497 using
-                        Informational Communties describing the relation
+                        Informational Communities describing the relation
                         with the ASN from which the route was received.
                     </postamble>
                 </texttable>
@@ -281,7 +281,7 @@
                         <c>64497:4:65551</c><c>Do not export route to AS 65551</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
-                            Communties to limit propagation of routes based on
+                            Communities to limit propagation of routes based on
                             the Peer ASN described in the third field.
                         </postamble>
                     </texttable>
@@ -302,7 +302,7 @@
                         <c>64497:5:840</c><c>Do not export to EBGP neighbors in United States of America</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
-                            Communties to trigger NO_EXPORT on routes only when
+                            Communities to trigger NO_EXPORT on routes only when
                             propagating the route to a certain geographical
                             region.
                         </postamble>
@@ -332,7 +332,7 @@
                         <c>64497:6:65551</c><c>Prepend 64497 once on export to AS 65551</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
-                            Communties to trigger prepending of the AS_PATH
+                            Communities to trigger prepending of the AS_PATH
                             only when propagating the route to a certain Peer
                             ASN.
                         </postamble>
@@ -355,7 +355,7 @@
                         <c>64497:7:840</c><c>Prepend once to EBGP neighbors in United States of America</c>
                         <postamble>
                             Example documentation for AS 64497 offering Action
-                            Communties to trigger prepending of the AS_PATH
+                            Communities to trigger prepending of the AS_PATH
                             only when propagating the route to a certain
                             geographical region.
                         </postamble>
