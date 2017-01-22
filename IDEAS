@@ -1,5 +1,8 @@
 perhaps add a "_only_ export to XXX" community example
 
+document about order of parsing in routing policy:
+    recommendation: large communities first, then 1997
+
 -----
 
 Suggested types of communities:
