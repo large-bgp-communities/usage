@@ -27,6 +27,17 @@
             </address>
         </author>
 
+        <author fullname="John Heasley" initials="J." surname="Heasley">
+            <organization abbrev="NTT">NTT Communications</organization>
+            <address>
+                <postal>
+                    <country>United States of America</country>
+                </postal>
+                <email>heas@shrubbery.net</email>
+            </address>
+        </author>
+
+
         <author fullname="Martijn Schmidt" initials="M." surname="Schmidt">
             <organization>i3D.net</organization>
             <address>
@@ -50,7 +61,7 @@
 
         <abstract>
             <t>
-                Examples and inspiration for operators on how to use BGP Large
+                Examples and inspiration for operators for the use of BGP Large
                 Communities.
             </t>
         </abstract>
@@ -71,8 +82,8 @@
             <t>
                 <xref target="I-D.ietf-idr-large-community">BGP Large Communities</xref>
                 provide a mechanism to signal opaque information between
-                Autonomous Systems. This document presents a set of examples on
-                how BGP Large Communities could be implemented by an operator
+                Autonomous Systems. This document presents a set of examples of
+                how Large BGP Communities could be employed by an operator
                 to achieve various goals. This document draws from experience
                 in Operational Communities such as <eref target="http://nanog.net">NANOG</eref>
                 and <eref target="http://nlnog.net">NLNOG</eref>.
@@ -80,9 +91,10 @@
             <t>
                 The opaque nature of BGP Large Communities allows for rapid
                 deployment of new features or changes to the product. Operators
-                are encouraged to publicly publish an up to date version of
-                their routing policy in which they document what each BGP Large
-                Community means.
+                are encouraged to publicly publish and maintain documentation
+                of the purpose of each Large BGP Community, both informational
+                and action, that they support or are visible in looking
+                glasses.
             </t>
         </section>
 
@@ -90,19 +102,22 @@
             <t>
                 BGP Large Communities are composed of a 4-octet Global
                 Administrator field followed by two 4-octet Local Data fields.
-                The design pattern described in this document uses a
+                Large BGP Communities are compose three 4-octet fields.  The
+                first is the Global Administrator field, whose value is the ASN
+                of AS that has defined the meaning of the remaining two 4-octet
+                fields, the Local Data fields. This document describes an
+                approach defining these fields as
                 "ASN:Function:Parameter"-approach to fill the three fields.
             </t>
             <t>
                 In deployments of both BGP Communities <xref target="RFC1997"/>
-                and BGP Large Communities, two categories of Communities are
-                recognised:
+                and BGP Large Communities, two categories of Communities exist:
                 <list style="symbols">
                     <t>Informational Communities</t>
                     <t>Action Communities</t>
                 </list>
-                For each context ideas are provided regarding the contents of
-                each of the three fields in BGP Large Communities.
+                For each, ideas are provided regarding the contents of each of
+                the three fields in BGP Large Communities.
             </t>
             <t>
                 Throughout the document a topology of four Autonomous Systems
@@ -121,14 +136,14 @@
        |        | 
        `<->- AS 64499
 ]]></artwork></figure>
-                AS 64497 obtains transit services from AS 65551. AS 64497
-                provides transit services to both AS 64498 and AS 64499. AS
-                64498 and AS 64499 maintain a peering relation in which they
-                only exchange their customer routes. 
+                AS 64497 obtains transit services from AS 65551, a 32-bit ASN.
+                AS 64497 provides transit services to both AS 64498 and AS
+                64499. AS 64498 and AS 64499 maintain a peering relationship in
+                which they only exchange their customer routes.
             </t>
             <section title="Informational Communities">
                 <t>
-                    Informational Communites serve as markers regarding the
+                    Informational Communites are labels for attributes such as
                     origin of the route announcement, the relation with the
                     EBGP neighbor or for instance the intended propagation
                     audience. Informational Communities also assist in network
@@ -136,39 +151,39 @@
                 </t>
                 <t>
                     The Global Administrator field is set to the ASN which is
-                    marking the routes with the Informational Communities. As
-                    an example: on a route which AS 64497 announces to AS
-                    64498, AS 64497 might add the BGP Large Community
-                    64497:100:31 to signal to AS 64498 that the route was
-                    learned in the Netherlands.
+                    marking the routes with the Informational Communities. For
+                    example, AS 64497 might add a community with the GA 64497
+                    to a route learned from an iBGP or eBGP peer that means
+                    that the route was learned from or originated by a device
+                    in the Netherlands.
                 </t>
                 <t>
                     In general the intended audience of Informational
-                    Communities are downstream networks, but any adjacent
-                    Autonomous System could benefit from receiving these
-                    communities.
+                    Communities are downstream networks and the Global
+                    Administrator itself, but any Autonomous System could
+                    benefit from receiving these communities.
                 </t>
             </section>
 
             <section title="Action Communities">
                 <t>
                     Action Communities are attached to routes to request
-                    non-default behaviour in an adjacent Autonomous System. For
-                    instance, Action Communities are used to change the route's
-                    propagation characteristics, the route's LOCAL_PREF value
-                    or the amount of AS_PATH prepends that should be added when
-                    exporting or importing a route.
+                    non-default behaviour in this, a conferation or an external
+                    AS. Action Communities could be used to change the route's
+                    propagation characteristics, the LOCAL_PREFENCE or the
+                    number of AS_PATH prepends to add when exporting or
+                    importing a route.
                 </t>
                 <t>
                     The Global Administrator field is set to the ASN which is
-                    expected to perform a non-default action upon receiving the
-                    route. For instance, if AS 64499 would want to request AS
-                    64497 to lower the LOCAL_PREFERENCE below the default, AS
-                    64499 could tag the route with 64497:20:50.
+                    expected to perform the action. For instance, AS 64499
+                    might add a Large Community with the GA 64497 to signal AS
+                    64497 to perform an action upon that route.
                 </t>
                 <t>
                     In general the intended audience of Action Communities is
-                    an upstream provider.
+                    an upstream provider, but realistically could be any AS
+                    willing to act upon it.
                 </t>
             </section>
         </section>
@@ -184,13 +199,13 @@
                 <section title="An ISO 3166-1 numeric function">
                     <t>
                         AS 64497 could assign a value of 1 to the first Local
-                        Data field to designate the function of the parameter
-                        in the second Local Data field as ISO-3166-1 numeric
-                        country identifiers. 
+                        Data field to designate the function of the second
+                        Local Data field as ISO-3166-1 numeric country
+                        identifiers. 
                     </t>
                     <texttable title="Information: ISO 3166-1" anchor='info_iso3166'>
                         <ttcol align='center'>BGP Large Community</ttcol>
-                        <ttcol align='left'>Meaning</ttcol>
+                        <ttcol align='left'>Description</ttcol>
                         <c>64497:1:528</c><c>Route learned in Netherlands</c>
                         <c>64497:1:392</c><c>Route learned in Japan</c>
                         <c>64497:1:840</c><c>Route learned in United States of America</c>
@@ -214,7 +229,7 @@
                     </t>
                     <texttable title="Information: Regions" anchor='info_regions'>
                         <ttcol align='center'>BGP Large Community</ttcol>
-                        <ttcol align='left'>Meaning</ttcol>
+                        <ttcol align='left'>Description</ttcol>
                         <c>64497:2:2</c><c>Route learned in Africa</c>
                         <c>64497:2:9</c><c>Route learned in Oceania</c>
                         <c>64497:2:145</c><c>Route learned in Western Asia</c>
@@ -237,7 +252,7 @@
                 </t>
                 <texttable title="Information: Relation" anchor='info_relation'>
                     <ttcol align='center'>BGP Large Community</ttcol>
-                    <ttcol align='left'>Meaning</ttcol>
+                    <ttcol align='left'>Description</ttcol>
                     <c>64497:3:1</c><c>Route learned from a customer</c>
                     <c>64497:3:2</c><c>Route learned from a peering partner</c>
                     <c>64497:3:3</c><c>Route learned from an upstream provider</c>
@@ -275,7 +290,7 @@
                     </t>
                     <texttable title="Action: Peer ASN NO_EXPORT" anchor='action_peer_no_export'>
                         <ttcol align='center'>BGP Large Community</ttcol>
-                        <ttcol align='left'>Meaning</ttcol>
+                        <ttcol align='left'>Description</ttcol>
                         <c>64497:4:2914</c><c>Do not export route to AS 2914</c>
                         <c>64497:4:7018</c><c>Do not export route to AS 7018</c>
                         <c>64497:4:65551</c><c>Do not export route to AS 65551</c>
@@ -296,7 +311,7 @@
                     </t>
                     <texttable title="Action: NO_EXPORT in Region" anchor='action_region_no_export'>
                         <ttcol align='center'>BGP Large Community</ttcol>
-                        <ttcol align='left'>Meaning</ttcol>
+                        <ttcol align='left'>Description</ttcol>
                         <c>64497:5:528</c><c>Do not export to EBGP neighbors in the Netherlands</c>
                         <c>64497:5:392</c><c>Do not export to EBGP neighbors in Japan</c>
                         <c>64497:5:840</c><c>Do not export to EBGP neighbors in United States of America</c>
@@ -326,7 +341,7 @@
                     </t>
                     <texttable title="Action: Prepend to Peer ASN " anchor='action_peer_prepend'>
                         <ttcol align='center'>BGP Large Community</ttcol>
-                        <ttcol align='left'>Meaning</ttcol>
+                        <ttcol align='left'>Description</ttcol>
                         <c>64497:6:2914</c><c>Prepend 64497 once on export to AS 2914</c>
                         <c>64497:6:7018</c><c>Prepend 64497 once on export to AS 7018</c>
                         <c>64497:6:65551</c><c>Prepend 64497 once on export to AS 65551</c>
@@ -349,7 +364,7 @@
                     </t>
                     <texttable title="Action: Prepend in Region" anchor='action_region_prepend'>
                         <ttcol align='center'>BGP Large Community</ttcol>
-                        <ttcol align='left'>Meaning</ttcol>
+                        <ttcol align='left'>Description</ttcol>
                         <c>64497:7:528</c><c>Prepend once to EBGP neighbors in the Netherlands</c>
                         <c>64497:7:392</c><c>Prepend once to EBGP neighbors in Japan</c>
                         <c>64497:7:840</c><c>Prepend once to EBGP neighbors in United States of America</c>
@@ -431,7 +446,7 @@
                 </t>
                 <texttable title="Action: Regional Preference Communities" anchor='action_pref_region'>
                     <ttcol align='center'>BGP Large Community</ttcol>
-                    <ttcol align='left'>Meaning</ttcol>
+                    <ttcol align='left'>Description</ttcol>
                     <c>64497:15:528</c><c>Set as peer route in Netherlands</c>
                     <c>64497:19:840</c><c>Set as backup route in United States of America</c>
                 </texttable>
