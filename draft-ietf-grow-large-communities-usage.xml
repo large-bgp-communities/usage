@@ -31,6 +31,10 @@
             <organization abbrev="NTT">NTT Communications</organization>
             <address>
                 <postal>
+                    <street>12160 NW Coleman Drive</street>
+                    <city>Portland</city>
+                    <region>OR</region>
+                    <code>97229</code>
                     <country>United States of America</country>
                 </postal>
                 <email>heas@shrubbery.net</email>
@@ -80,7 +84,7 @@
     <middle>
         <section title="Introduction">
             <t>
-                <xref target="I-D.ietf-idr-large-community">BGP Large Communities</xref>
+                <xref target="RFC8092">BGP Large Communities</xref>
                 provide a mechanism to signal opaque information between
                 Autonomous Systems. This document presents a set of examples of
                 how Large BGP Communities could be employed by an operator
@@ -489,7 +493,7 @@
             <?rfc include="reference.RFC.2119"?>
             <?rfc include="reference.RFC.7454"?>
             <?rfc include="reference.RFC.4264"?>
-            <?rfc include="reference.I-D.draft-ietf-idr-large-community-12"?>
+            <?rfc include="reference.RFC.8092"?>
         </references>
 <!--
             <references title="Informative References">
