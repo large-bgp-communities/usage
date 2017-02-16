@@ -104,14 +104,12 @@
 
         <section title="The Generic Design Pattern">
             <t>
-                BGP Large Communities are composed of a 4-octet Global
-                Administrator field followed by two 4-octet Local Data fields.
                 Large BGP Communities are compose three 4-octet fields.  The
                 first is the Global Administrator field, whose value is the ASN
                 of AS that has defined the meaning of the remaining two 4-octet
                 fields, the Local Data fields. This document describes an
-                approach defining these fields as
-                "ASN:Function:Parameter"-approach to fill the three fields.
+                approach defining these fields as "ASN:Function:Parameter" fill
+                the three fields.
             </t>
             <t>
                 In deployments of both BGP Communities <xref target="RFC1997"/>
@@ -120,7 +118,7 @@
                     <t>Informational Communities</t>
                     <t>Action Communities</t>
                 </list>
-                For each, ideas are provided regarding the contents of each of
+                For each category, ideas are provided regarding the contents of
                 the three fields in BGP Large Communities.
             </t>
             <t>
