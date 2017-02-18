@@ -87,13 +87,13 @@
                 <xref target="RFC8092">BGP Large Communities</xref>
                 provide a mechanism to signal opaque information between
                 Autonomous Systems. This document presents a set of examples of
-                how Large BGP Communities could be employed by an operator
+                how Large BGP Communities could be deployed by an operator
                 to achieve various goals. This document draws from experience
                 in Operational Communities such as <eref target="http://nanog.net">NANOG</eref>
                 and <eref target="http://nlnog.net">NLNOG</eref>.
             </t>
             <t>
-                The opaque nature of BGP Large Communities allows for rapid
+                The opaque nature of BGP Large Communities allows for the rapid
                 deployment of new features or changes to the product. Operators
                 are encouraged to publicly publish and maintain documentation
                 of the purpose of each Large BGP Community, both informational
@@ -104,22 +104,22 @@
 
         <section title="The Generic Design Pattern">
             <t>
-                Large BGP Communities are compose three 4-octet fields.  The
-                first is the Global Administrator field, whose value is the ASN
-                of AS that has defined the meaning of the remaining two 4-octet
+                Large BGP Communities are composed of three 4-octet fields.  The
+                first is the Global Administrator field, whose value is the Autonomous
+                System (ASN) that has defined the meaning of the remaining two 4-octet
                 fields, the Local Data fields. This document describes an
-                approach defining these fields as "ASN:Function:Parameter" fill
-                the three fields.
+                approach defining these fields as "ASN:Function:Parameter".
             </t>
             <t>
-                In deployments of both BGP Communities <xref target="RFC1997"/>
-                and BGP Large Communities, two categories of Communities exist:
+                In contemporary deployments of both BGP Communities <xref target="RFC1997"/>
+                and BGP Large Communities, functionality can basically be divided into
+		the following categories:
                 <list style="symbols">
                     <t>Informational Communities</t>
                     <t>Action Communities</t>
                 </list>
-                For each category, ideas are provided regarding the contents of
-                the three fields in BGP Large Communities.
+                Ideas are provided for the contents of the two Local Data fields in
+		BGP Large Communities when dealing with each of these categories.
             </t>
             <t>
                 Throughout the document a topology of four Autonomous Systems
@@ -146,21 +146,22 @@
             <section title="Informational Communities">
                 <t>
                     Informational Communites are labels for attributes such as
-                    origin of the route announcement, the relation with the
-                    EBGP neighbor or for instance the intended propagation
-                    audience. Informational Communities also assist in network
-                    operations such as debugging.
+                    the origin of the route announcement, the commercial relation
+                    with the eBGP neighbor or the intended propagation audience.
+		    Informational Communities can also assist in providing
+		    valuable information for day-to-day network operations such
+		    as debugging or capacity planning.
                 </t>
                 <t>
-                    The Global Administrator field is set to the ASN which is
-                    marking the routes with the Informational Communities. For
+                    The Global Administrator field is set to the ASN which
+                    marks the routes with the Informational Communities. For
                     example, AS 64497 might add a community with the GA 64497
-                    to a route learned from an iBGP or eBGP peer that means
-                    that the route was learned from or originated by a device
-                    in the Netherlands.
+                    to a route accepted from an iBGP or eBGP neighbor as a means
+		    of signalling that it was imported in a certain geographical
+		    region.
                 </t>
                 <t>
-                    In general the intended audience of Informational
+                    In general, the intended audiences of Informational
                     Communities are downstream networks and the Global
                     Administrator itself, but any Autonomous System could
                     benefit from receiving these communities.
@@ -169,23 +170,24 @@
 
             <section title="Action Communities">
                 <t>
-                    Action Communities are attached to routes to request
-                    non-default behaviour in this, a conferation or an external
-                    AS. Action Communities could be used to change the route's
-                    propagation characteristics, the LOCAL_PREFENCE or the
-                    number of AS_PATH prepends to add when exporting or
-                    importing a route.
+		    Action Communities are added as a label to request non-default
+		    treatment of a route by having the operator's defined routing
+		    policy adjust variables such as its propagation characteristics,
+		    the LOCAL_PREFENCE, the next-hop, or the number of AS_PATH
+		    prepends to be added when exporting or importing a route to/from
+		    another AS.
                 </t>
                 <t>
-                    The Global Administrator field is set to the ASN which is
-                    expected to perform the action. For instance, AS 64499
-                    might add a Large Community with the GA 64497 to signal AS
-                    64497 to perform an action upon that route.
+                    The Global Administrator field is set to the ASN which has defined
+                    the functionality of that Large Community and is therefore expected
+		    to perform the action. For instance, AS 64499 might label a route
+		    with a Large Community containing GA 64497 to signal AS 64497 a
+		    request to perform a pre-defined action upon that route.
                 </t>
                 <t>
-                    In general the intended audience of Action Communities is
-                    an upstream provider, but realistically could be any AS
-                    willing to act upon it.
+                    In general, the intended audiences of Action Communities are
+                    upstream providers and the Global Administrator itself, but in theory
+		    any AS could act as the audience if they are willing to do so.
                 </t>
             </section>
         </section>
@@ -193,43 +195,40 @@
         <section title="Examples of Informational Communities">
             <section title="Location">
                 <t>
-                    AS 64497 can inform its downstream networks about the
-                    geographical entity where AS 64497 learned a route by
-                    marking the route with BGP Large Communities following one
-                    or a combination of the following schemes.
+                    AS 64497 may inform other networks about the geographical region
+		    where AS 64497 imported a route by marking it with BGP Large Communities
+		    following one of the following schemes or a combination thereof.
                 </t>
                 <section title="An ISO 3166-1 numeric function">
                     <t>
                         AS 64497 could assign a value of 1 to the first Local
-                        Data field to designate the function of the second
-                        Local Data field as ISO-3166-1 numeric country
-                        identifiers. 
+                        Data field to designate the content of the second
+                        Local Data field as an ISO-3166-1 numeric country
+                        identifier. 
                     </t>
                     <texttable title="Information: ISO 3166-1" anchor='info_iso3166'>
                         <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Description</ttcol>
-                        <c>64497:1:528</c><c>Route learned in Netherlands</c>
+                        <c>64497:1:528</c><c>Route learned in the Netherlands</c>
                         <c>64497:1:392</c><c>Route learned in Japan</c>
-                        <c>64497:1:840</c><c>Route learned in United States of America</c>
+                        <c>64497:1:840</c><c>Route learned in the United States of America</c>
                         <postamble>
-                            Example documentation for AS 64497 using
-                            Informational Communities describing the origin of
-                            routes using ISO 3166-1 numeric identifiers.
+                            Example documentation for Informational Communities
+			    deployed by AS 64497 to describe the location where a
+			    route was imported using ISO 3166-1 numeric identifiers.
                         </postamble>
                     </texttable>
                 </section>
-                <section title="An UNSD region function">
+                <section title="A UNSD Region function">
                     <t>
                         AS 64497 could assign a value of 2 to the first Local
-                        Data field to designate the function of the parameter
-                        in the second Local Data field as an identifier for
-                        the macro geographical (continental) regions, geographical
-                        sub-regions, or selected economic and other groupings
-                        following a set of published identifiers by the 
-                        <eref target="http://unstats.un.org/unsd/methods/m49/m49regin.htm">United
-                            Nations Statistics Division</eref>.
+                        Data field to designate the content of the second
+                        Local Data field as a number published by the <eref target="http://unstats.un.org/unsd/methods/m49/m49regin.htm">United
+			Nations Statistics Division</eref> for macro geographical
+			(continental) regions, geographical sub-regions, or
+			selected economic and other groupings.
                     </t>
-                    <texttable title="Information: Regions" anchor='info_regions'>
+                    <texttable title="Information: UNSD Regions" anchor='info_regions'>
                         <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Description</ttcol>
                         <c>64497:2:2</c><c>Route learned in Africa</c>
@@ -237,10 +236,10 @@
                         <c>64497:2:145</c><c>Route learned in Western Asia</c>
                         <c>64497:2:150</c><c>Route learned in Europe</c>
                         <postamble>
-                            Example documentation for AS 64497 using
-                            Informational Communities describing the origin of
-                            routes using numeric identifiers provided by the UN
-                            Statistics Division.
+                            Example documentation for Informational Communities
+			    deployed by AS 64497 to describe the location where a
+			    route was imported using numeric identifiers published
+			    by the United Nations Statistics Division.
                         </postamble>
                     </texttable>
                 </section>
@@ -248,29 +247,32 @@
             <section title="Relation">
                 <t>
                     AS 64497 could assign a value of 3 to the first Local Data
-                    field to designate that the second Local Data field
-                    contains an identifier showing the relation with the EBGP
-                    neighbor from whom the route was received.
+                    field to designate the content of the second Local Data field
+                    as a number indicating whether the route was originated inside
+		    its own network, or if it was instead learned externally and
+		    how its relation with that specific eBGP neighbor can be
+		    characterized.
                 </t>
                 <texttable title="Information: Relation" anchor='info_relation'>
                     <ttcol align='center'>BGP Large Community</ttcol>
                     <ttcol align='left'>Description</ttcol>
-                    <c>64497:3:1</c><c>Route learned from a customer</c>
-                    <c>64497:3:2</c><c>Route learned from a peering partner</c>
-                    <c>64497:3:3</c><c>Route learned from an upstream provider</c>
+                    <c>64497:3:1</c><c>Route originated internally</c>
+                    <c>64497:3:2</c><c>Route learned from a customer</c>
+                    <c>64497:3:3</c><c>Route learned from a peering partner</c>
+                    <c>64497:3:4</c><c>Route learned from an upstream provider</c>
                     <postamble>
-                        Example documentation for AS 64497 using
-                        Informational Communities describing the relation
-                        with the ASN from which the route was received.
+                        Example documentation for Informational Communities
+			deployed by AS 64497 to describe the relation to the
+			ASN from which the route was received.
                     </postamble>
                 </texttable>
             </section>
             <section title="Combining Informational Communities">
                 <t>
-                    Multiple Informational Communities can be tagged on a
+                    Multiple Informational Communities may be tagged on a
                     route, for example: a route learned in the Netherlands from
-                    a customer can contain both 64497:1:528 and 64497:2:150
-                    and 64497:3:1.
+                    a customer could contain communities 64497:1:528, 64497:2:150
+                    and 64497:3:2 at the same time.
                 </t>
             </section>
         </section>
@@ -278,17 +280,18 @@
         <section title="Examples of Action Communities">
             <section title="Selective NO_EXPORT">
                 <t>
-                    As part of the commercial agreement between AS 64497 and AS
-                    64498, AS 64497 might offer AS 64498 certain BGP Traffic
-                    Engineering features such as selectively not export
-                    routes learned from 64498 to certain EBGP neighbors of AS
-                    64497.
+                    As part of a commercial agreement between AS 64497 and AS
+                    64498, AS 64497 might expose BGP traffic engineering features
+		    to AS 64498. One such BGP traffic engineering feature could be
+		    selectively not exporting routes learned from AS 64498 to
+		    certain eBGP neighbors of AS 64497.
                 </t>
                 <section title="Peer ASN Based Selective NO_EXPORT">
                     <t>
-                        AS 64497 might assign function identifier 4 to allow
-                        preventing propagation of routes to the ASN listed in
-                        the second Local Data field.
+                        AS 64497 could assign a value of 4 to the first Local Data
+                        field to designate the content of the second Local Data field
+                        as a neighboring ASN to which the prevention of direct route
+			propagation is requested.
                     </t>
                     <texttable title="Action: Peer ASN NO_EXPORT" anchor='action_peer_no_export'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -297,31 +300,35 @@
                         <c>64497:4:7018</c><c>Do not export route to AS 7018</c>
                         <c>64497:4:65551</c><c>Do not export route to AS 65551</c>
                         <postamble>
-                            Example documentation for AS 64497 offering Action
-                            Communities to limit propagation of routes based on
-                            the Peer ASN described in the third field.
+                            Example documentation for Action Communities deployed
+			    by AS 64497 to expose a BGP traffic engineering feature
+			    which selectively prevents the direct propagation of routes
+			    to the neighboring ASN listed in the second Local Data field.
                         </postamble>
                     </texttable>
                 </section>
                 <section title="Location Based Selective NO_EXPORT">
                     <t>
-                        AS 64497 might assign function identifier 5 to allow
-                        its customers to request selectively not exporting
-                        routes on EBGP sessions within a certain geographical
-                        area.  This example follows the ISO 3166-1 numeric
-                        encoding.
+                        AS 64497 could assign a value of 5 to the first Local Data
+                        field to designate the content of the second Local Data field
+                        as an ISO 3166-1 numeric country identifier in which the
+			prevention of direct route propagation to certain eBGP neighbors
+			is requested. This might however not prevent one of those eBGP
+			neighbors from learning that route in another region and in turn
+			making it available in the targeted country.
                     </t>
                     <texttable title="Action: NO_EXPORT in Region" anchor='action_region_no_export'>
                         <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Description</ttcol>
-                        <c>64497:5:528</c><c>Do not export to EBGP neighbors in the Netherlands</c>
-                        <c>64497:5:392</c><c>Do not export to EBGP neighbors in Japan</c>
-                        <c>64497:5:840</c><c>Do not export to EBGP neighbors in United States of America</c>
+                        <c>64497:5:528</c><c>Do not export to eBGP neighbors in the Netherlands</c>
+                        <c>64497:5:392</c><c>Do not export to eBGP neighbors in Japan</c>
+                        <c>64497:5:840</c><c>Do not export to eBGP neighbors in the United States of America</c>
                         <postamble>
-                            Example documentation for AS 64497 offering Action
-                            Communities to trigger NO_EXPORT on routes only when
-                            propagating the route to a certain geographical
-                            region.
+                            Example documentation for Action Communities deployed
+			    by AS 64497 to expose a BGP traffic engineering feature
+			    which selectively prevents the direct propagation of routes
+			    to all eBGP neighbors in the geographical region listed
+			    in the second Local Data field.
                         </postamble>
                     </texttable>
                 </section>
@@ -329,17 +336,18 @@
 
             <section title="Selective AS_PATH Prepending">
                 <t>
-                    As part of the commercial agreement between AS 64497 and AS
-                    64498, AS 64497 might offer AS 64498 certain BGP Traffic
-                    Engineering features such as selectively prepending the
-                    AS_PATH with 64497's ASN to certain EBGP neighbors of AS
-                    64497.
+                    As part of a commercial agreement between AS 64497 and AS
+                    64498, AS 64497 might expose BGP traffic engineering features
+		    to AS 64498. One such BGP traffic engineering feature could be
+		    selectively prepending the AS_PATH with AS 64497 to certain
+		    certain eBGP neighbors of AS 64497.
                 </t>
                 <section title="Peer ASN Based Selective AS_PATH Prepending">
                     <t>
-                        AS 64497 might assign function identifier 6 to allow
-                        prepending the AS_PATH on propagation of routes to the
-                        ASN listed in the second Local Data field.
+                        AS 64497 could assign a value of 6 to the first Local Data
+                        field to designate the content of the second Local Data field
+                        as a neighboring ASN to which prepending of the AS_PATH with
+			AS 64497 is requested upon direct propagation of the route.
                     </t>
                     <texttable title="Action: Prepend to Peer ASN " anchor='action_peer_prepend'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -348,21 +356,20 @@
                         <c>64497:6:7018</c><c>Prepend 64497 once on export to AS 7018</c>
                         <c>64497:6:65551</c><c>Prepend 64497 once on export to AS 65551</c>
                         <postamble>
-                            Example documentation for AS 64497 offering Action
-                            Communities to trigger prepending of the AS_PATH
-                            only when propagating the route to a certain Peer
-                            ASN.
+                            Example documentation for Action Communities deployed
+			    by AS 64497 to expose a BGP traffic engineering feature
+			    which selectively prepends the AS_PATH with AS 64497 when
+			    propagating the route to a certain eBGP neighbor. 
                         </postamble>
                     </texttable>
                 </section>
                 <section title="Location Based Selective AS_PATH Prepending">
                     <t>
-                        AS 64497 might assign function identifier 7 to allow
-                        prepending of the AS_PATH on propagation of routes to
-                        on any EBGP neighbor's interconnection in the
-                        geographical entity listed in the second Local Data
-                        field. This example follows the ISO 3166-1 numeric
-                        regions codes in the Local Data 2 field.
+                        AS 64497 could assign a value of 7 to the first Local Data
+                        field to designate the content of the second Local Data field
+                        as an ISO 3166-1 numeric country identifier to which the
+			prepending of the AS_PATH with AS 64497 is requested upon direct
+			propagation of the route to all eBGP neighbors in that region.
                     </t>
                     <texttable title="Action: Prepend in Region" anchor='action_region_prepend'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -371,19 +378,20 @@
                         <c>64497:7:392</c><c>Prepend once to EBGP neighbors in Japan</c>
                         <c>64497:7:840</c><c>Prepend once to EBGP neighbors in United States of America</c>
                         <postamble>
-                            Example documentation for AS 64497 offering Action
-                            Communities to trigger prepending of the AS_PATH
-                            only when propagating the route to a certain
-                            geographical region.
+                            Example documentation for Action Communities deployed
+			    by AS 64497 to expose a BGP traffic engineering feature
+			    which selectively prepends the AS_PATH with AS 64497 when
+			    propagating the route to all eBGP neighbors in the
+			    geographical region listed in the second Local Data field.
                         </postamble>
                     </texttable>
                 </section>
             </section>
 
-            <section title="Location based manipulation of LOCAL_PREF">
+            <section title="Location Based Manipulation of LOCAL_PREF">
                 <t>
-                    In some cases, it can be desirable for an autonomous system
-                    to allow adjacent Autonomous Systems to directly influence
+                    It may be desirable for an Autonomous System to allow
+		    adjacent Autonomous Systems to directly influence
                     the degree of preference associated with a route, usually
                     expressed within the LOCAL_PREF attribute.
                 </t>
