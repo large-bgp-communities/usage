@@ -292,53 +292,60 @@
                 </section>
             </section>
 
-            <section title="Location Based Manipulation of LOCAL_PREF">
+            <section title="Manipulation of the LOCAL_PREF attribute">
                 <t>
-                    It may be desirable for an Autonomous System to allow adjacent Autonomous Systems to directly influence the degree of preference associated with a route, usually expressed within the LOCAL_PREF attribute.
+                    As part of a commercial agreement between AS 64497 and AS 64498, AS 64497 might expose BGP traffic engineering features to AS 64498.
+                    One such BGP traffic engineering feature might allow AS 64498 to manipulate the value of the LOCAL_PREF attribute which AS 64497 assigns to routes learned from AS 64498, even though the LOCAL_PREF attribute is not sent to EBGP neighbors in BGP UPDATE messages.
                 </t>
                 <t>
-                    Furthermore, in the case of large networks spanning significant geography, it is often also useful to be able to extend this capability and scope its effect to a geographic region.
-                    This is a more powerful mechanism than AS_PATH prepending, but since degree of preference   determines BGP route selection and thus onward advertisement, it can also be self-limiting in its scope.
-                </t>
-                <t>
-                    Since the LOCAL_PREF attribute which influences degree of preference is locally significant within each autonomous system, it is not usually practical or useful to compare LOCAL_PREF attribute values between autonomous systems.
-                    Instead it can be useful to classify the major types of route likely to exist within an autonomous system's routing hierarchy and provide an ability to set one's route to that preference:
-                    <list style="symbols">
-                        <t>
-                            A qualified customer route. Usually the highest preference.
-                        </t>
-                        <t>
-                            A peer, or network-share, route. A co-operating network provider engaged in a partnership for customer coverage ("peering").
-                        </t>
-                        <t>
-                            A last resort, or backup route.
-                        </t>
-                    </list>
-                </t>
-                <t>
-                    It is entirely possible that some providers may have more classes of route preference but it is possible to codify both the route preference class and the regional scope within the Local Data fields of the Large Community attribute.
-                </t>
-                <t>
-                    For example, AS64497 might establish the following function identifiers to set route preference class, which could allow pairing with a location or peer-based operand to determine scope.
+                    Since the LOCAL_PREF attribute values assigned to routes are locally significant within each Autonomous System, it is not practical to list them in this document.
+                    Instead, it could be useful to classify the major types of route likely to exist within an Autonomous System's routing hierarchy and expose an ability to set one's route to the corresponding LOCAL_PREF value.
+                    The following non-exhaustive list places the major types of route in order of descending LOCAL_PREF value and assigns a function identifier which could be used in the first Local Data field of a BGP Large Community:
                 </t>
                 <texttable title="Action: Preference Function Identifiers" anchor='action_pref_func'>
                     <ttcol align='center'>Function</ttcol>
                     <ttcol align='left'>Preference Class</ttcol>
-                    <c>10</c><c>Qualified customer route. Highest preference.</c>
-                    <c>15</c><c>Peering partner. Medium preference.</c>
-                    <c>19</c><c>Route of last resort. Lowest preference.</c>
+                    <c>8</c><c>Normal customer route.</c>
+                    <c>9</c><c>Backup customer route.</c>
+                    <c>10</c><c>Peering route.</c>
+                    <c>11</c><c>Upstream transit route.</c>
+                    <c>12</c><c>Fallback route, to be installed if no other path is available.</c>
                 </texttable>
+                <section title="Global Manipulation of LOCAL_PREF">
+                    <t>
+                        AS 64497 could place one of the pre-defined function identifiers in the first Local Data field and set the value 0 in the second Local Data field to designate that the LOCAL_PREF associated with that function identifier should be applied for that route throughout the whole Autonomous System.
+                    </t>
+                    <texttable title="Action: Global LOCAL_PREF Manipulation" anchor='action_pref_global'>
+                        <ttcol align='center'>BGP Large Community</ttcol>
+                        <ttcol align='left'>Description</ttcol>
+                        <c>64497:9:0</c><c>Assign LOCAL_PREF for a customer backup route</c>
+                        <c>64497:10:0</c><c>Assign LOCAL_PREF for a peering route</c>
+                        <c>64497:12:0</c><c>Assign LOCAL_PREF for a fallback route</c>
+                        <postamble>
+                            Example documentation for Action Communities deployed by AS 64497 to expose a BGP traffic engineering feature which allows a BGP neighbor to manipulate the LOCAL_PREF attribute for the route within AS 64497's Autonomous System on a global basis.
+                        </postamble>
+                    </texttable>
+                </section>
+                <section title="Location Based Manipulation of LOCAL_PREF">
+                    <t>
+                        AS 64497 could place one of the pre-defined function identifiers in the first Local Data field and use an ISO 3166-1 numeric country identifier in the second Local Data field to designate the geographical region in which the non-default LOCAL_PREF associated with that function identifier should be applied to the route.
+                        The value of the LOCAL_PREF attribute should not deviate from the default for that route type in all regions not targeted by one or more of these Action Communities.
+                    </t>
+                    <texttable title="Action: Regional LOCAL_PREF Manipulation" anchor='action_pref_region'>
+                        <ttcol align='center'>BGP Large Community</ttcol>
+                        <ttcol align='left'>Description</ttcol>
+                        <c>64497:9:528</c><c>Assign LOCAL_PREF for a customer backup route on IBGP speakers in the Netherlands</c>
+                        <c>64497:10:392</c><c>Assign LOCAL_PREF for a peering route on IBGP speakers in Japan</c>
+                        <c>64497:12:840</c><c>Assign LOCAL_PREF for a fallback route on IBGP speakers in United States of America</c>
+                        <postamble>
+                            Example documentation for Action Communities deployed by AS 64497 to expose a BGP traffic engineering feature which allows a BGP neighbor to selectively manipulate the LOCAL_PREF attribute on IBGP speakers in the geographical region listed in the second Local Data field.
+                        </postamble>
+                    </texttable>
+                </section>
                 <t>
-                    Once established, these route preference setting functions can be linked with a scoping operand such as per-peer or per-location based identifiers in order to provide AS64497's customers with a comprehensive and rich toolset to influence route preference.
-                </t>
-                <texttable title="Action: Regional Preference Communities" anchor='action_pref_region'>
-                    <ttcol align='center'>BGP Large Community</ttcol>
-                    <ttcol align='left'>Description</ttcol>
-                    <c>64497:15:528</c><c>Set as peer route in Netherlands</c>
-                    <c>64497:19:840</c><c>Set as backup route in United States of America</c>
-                </texttable>
-                <t>
-                    Since the degree of preference influences BGP best path selection (which in turn influences onward route propagation) Operators should take special care with a traffic engineering tool such as location based local preference influence (<xref target="RFC4264">BGP Wedgies</xref>).
+                    The degree of preference learned via the LOCAL_PREF attribute strongly influences the BGP Decision Process, which in turn affects the scope of route propagation to other BGP neighbors.
+                    Therefore, Operators should take special care when using Action Communities that decrease the degree of preference stored in the LOCAL_PREF attribute to a value below that of another major route type.
+                    Some of the unintended BGP states that might arise as a result of these traffic engineering decisions are described as "BGP Wedgies" in <xref target="RFC4264"/>.
                 </t>
             </section>
         </section>
