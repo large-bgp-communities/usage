@@ -31,10 +31,10 @@
             <organization abbrev="NTT">NTT Communications</organization>
             <address>
                 <postal>
-                    <street>12160 NW Coleman Drive</street>
+                    <street>1111 NW 53rd Drive</street>
                     <city>Portland</city>
                     <region>OR</region>
-                    <code>97229</code>
+                    <code>97210</code>
                     <country>United States of America</country>
                 </postal>
                 <email>heas@shrubbery.net</email>
@@ -128,12 +128,12 @@
             </t>
             <section title="Informational Communities">
                 <t>
-                    Informational Communites are labels for attributes such as the origin of the route announcement, the nature of the relation with the EBGP neighbor or the intended propagation audience.
+                    Informational Communities are labels for attributes such as the origin of the route announcement, the nature of the relation with the EBGP neighbor or the intended propagation audience.
                     Informational Communities can also assist in providing valuable information for day-to-day network operations such as debugging or capacity planning.
                 </t>
                 <t>
                     The Global Administrator field is set to the ASN which marks the routes with the Informational Communities.
-                    For example, AS 64497 might add a community with the GA 64497 to a route accepted from an IBGP or EBGP neighbor as a means of signalling that it was imported in a certain geographical region.
+                    For example, AS 64497 might add a community with the GA 64497 to a route accepted from an IBGP or EBGP neighbor as a means of signaling that it was imported in a certain geographical region.
                 </t>
                 <t>
                     In general, the intended audiences of Informational Communities are downstream networks and the Global Administrator itself, but any Autonomous System could benefit from receiving these communities.
@@ -142,7 +142,7 @@
 
             <section title="Action Communities">
                 <t>
-                    Action Communities are added as a label to request non-default treatment of a route by having the operator's defined routing policy adjust variables such as its propagation characteristics, the LOCAL_PREFENCE, the next-hop, or the number of AS_PATH prepends to be added when exporting or importing a route to/from another AS.
+                    Action Communities are added as a label to request non-default treatment of a route by having the operator's defined routing policy adjust variables such as its propagation characteristics, the LOCAL_PREFERENCE, the next-hop, or the number of AS_PATH prepends to be added when exporting or importing a route to/from another AS.
                 </t>
                 <t>
                     The Global Administrator field is set to the ASN which has defined the functionality of that Large Community and is therefore expected to perform the action.
@@ -342,11 +342,13 @@
                         </postamble>
                     </texttable>
                 </section>
+                <section title='XXX add a title'>
                 <t>
                     The degree of preference learned via the LOCAL_PREF attribute strongly influences the BGP Decision Process, which in turn affects the scope of route propagation to other BGP neighbors.
                     Therefore, Operators should take special care when using Action Communities that decrease the degree of preference stored in the LOCAL_PREF attribute to a value below that of another major route type.
                     Some of the unintended BGP states that might arise as a result of these traffic engineering decisions are described as "BGP Wedgies" in <xref target="RFC4264"/>.
                 </t>
+                </section>
             </section>
         </section>
 
@@ -362,7 +364,7 @@
             </t>
         </section>
 
-        <section title="Acknowledgements">
+        <section title="Acknowledgments">
             <t>
                 The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, and Will Hargrave.
             </t>
