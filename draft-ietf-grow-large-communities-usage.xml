@@ -133,7 +133,7 @@
                 </t>
                 <t>
                     The Global Administrator field is set to the ASN which labels the routes with the Informational Communities.
-                    For example, AS 64497 might add a community with the GA 64497 to a route accepted from an IBGP or EBGP neighbor as a means of signalling that it was imported in a certain geographical region.
+                    For example, AS 64497 might add a community with the GA 64497 to a route accepted from an IBGP or EBGP neighbor as a means of signaling that it was imported in a certain geographical region.
                 </t>
                 <t>
                     In general, the intended audiences of Informational Communities are downstream networks and the Global Administrator itself, but any Autonomous System could benefit from receiving these communities.
