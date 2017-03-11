@@ -85,14 +85,14 @@
         <section title="Introduction">
             <t>
                 <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between Autonomous Systems.
-                This document presents examples of how operators might utilise Large BGP Communities to achieve various goals.
+                This document presents examples of how operators might utilise BGP Large Communities to achieve various goals.
                 This document draws from experience of operational communities such as <eref target="http://nanog.net">NANOG</eref> and <eref target="http://nlnog.net">NLNOG</eref>.
             </t>
         </section>
 
         <section title="The Design Overview">
             <t>
-                Large BGP Communities are composed of three 4-octet fields.
+                BGP Large Communities are composed of three 4-octet fields.
                 The first is the Global Administrator (GA) field, whose value is the Autonomous System Number (ASN) of the Autonomous System (AS) that has defined the meaning of the remaining two 4-octet fields, known as the Local Data fields.
                 This document describes an approach to defining these fields as "ASN:Function:Parameter".
             </t>
@@ -124,7 +124,7 @@
             </t>
             <t>
                 The opaque nature of BGP Large Communities allows for rapid deployment of new features or changes to products.
-                Operators are encouraged to publicly publish and maintain documentation of the purpose of each Large BGP Community, both informational and action, that they support or are visible in BGP RIBs.
+                Operators are encouraged to publicly publish and maintain documentation of the purpose of each BGP Large Community, both informational and action, that they support or are visible in BGP RIBs.
             </t>
             <section title="Informational Communities">
                 <t>
@@ -345,7 +345,7 @@
                         </postamble>
                     </texttable>
                 </section>
-                <section title="Note of Caution for LOCAL_PREF Functions>
+                <section title="Note of Caution for LOCAL_PREF Functions">
                 <t>
                     The LOCAL_PREF attribute strongly influences the BGP Decision Process, which in turn affects the scope of route propagation.
                     Therefore, Operators should take special care when using Action Communities that decrease the LOCAL_PREF value, and therefore the degree of preference, to a value below that of another route class.
