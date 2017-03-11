@@ -93,7 +93,7 @@
     <ttcol align='center'>this document</ttcol>
     <c>Global Administrator</c><c>ASN</c>
     <c>Local Data Part 1</c><c>Function</c>
-    <c>Local Data Part 2</c><c>&nbsp;Parameter</c>
+    <c>Local Data Part 2</c><c>Parameter</c>
     <postamble>A mapping table on the usage of fields in BGP Large Communities between <xref target="RFC8092"/> and this document.</postamble>
 </texttable>
             <t>
@@ -184,8 +184,8 @@
                     <texttable title="Information: UNSD Regions" anchor='info_regions'>
                         <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Description</ttcol>
-                        <c>64497:2:2&nbsp;&nbsp;</c><c>Route learned in Africa</c>
-                        <c>64497:2:9&nbsp;&nbsp;</c><c>Route learned in Oceania</c>
+                        <c>64497:2:2</c><c>Route learned in Africa</c>
+                        <c>64497:2:9</c><c>Route learned in Oceania</c>
                         <c>64497:2:145</c><c>Route learned in Western Asia</c>
                         <c>64497:2:150</c><c>Route learned in Europe</c>
                         <postamble>
