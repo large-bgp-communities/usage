@@ -117,18 +117,18 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    Part 2" contains a parameter value.  Using the canonical notation the
    above can be summarized as "ASN:Function:Parameter".
 
-   +------------------------+---------------------+
-   |         RFC 8092       |    this document    |
-   +------------------------+---------------------+
-   |  Global Administrator  |         ASN         |
-   +------------------------+---------------------+
-   |    Local Data Part 1   |       Function      |
-   +------------------------+---------------------+
-   |    Local Data Part 2   |       Parameter     |
-   +------------------------+---------------------+
+                 +----------------------+---------------+
+                 |       RFC 8092       | this document |
+                 +----------------------+---------------+
+                 | Global Administrator |      ASN      |
+                 |  Local Data Part 1   |    Function   |
+                 |  Local Data Part 2   |   Parameter   |
+                 +----------------------+---------------+
 
       A mapping table on the usage of fields in BGP Large Communities
                    between [RFC8092] and this document.
+
+                          Table 1: Field mapping
 
    In contemporary deployments of both BGP Communities [RFC1997] and BGP
    Large Communities, the function of a community can be divided into
@@ -254,7 +254,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
     64497 to describe the location where a route was imported using ISO
                         3166-1 numeric identifiers.
 
-                     Table 1: Information: ISO 3166-1
+                     Table 2: Information: ISO 3166-1
 
 3.1.2.  A UN M.49 Region function
 
@@ -295,7 +295,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
     64497 to describe the location where a route was imported using M49
     numeric codes published by the United Nations Statistics Division.
 
-                    Table 2: Information: UNSD Regions
+                    Table 3: Information: UNSD Regions
 
 3.2.  Relation Function
 
@@ -319,7 +319,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
     64497 to describe the relation to the ASN from which the route was
                                  learned.
 
-                      Table 3: Information: Relation
+                      Table 4: Information: Relation
 
 3.3.  Combining Informational Communities
 
@@ -368,7 +368,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
      the propagation of routes to the neighboring ASN specified in the
                              Parameter field.
 
-                      Table 4: Action: ASN NO_EXPORT
+                      Table 5: Action: ASN NO_EXPORT
 
 4.1.2.  Location Based Selective NO_EXPORT
 
@@ -410,7 +410,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
     the propagation of routes to all EBGP neighbors in the geographical
                  region specified in the Parameter field.
 
-                   Table 5: Action: NO_EXPORT in Region
+                   Table 6: Action: NO_EXPORT in Region
 
 4.2.  Selective AS_PATH Prepending
 
@@ -441,7 +441,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    the AS_PATH with AS 64497 when propagating the route to the specified
                               EBGP neighbor.
 
-                      Table 6: Action: Prepend to ASN
+                      Table 7: Action: Prepend to ASN
 
 
 
@@ -475,7 +475,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
       neighbors in the geographical region specified in the Parameter
                                   field.
 
-                    Table 7: Action: Prepend in Region
+                    Table 8: Action: Prepend in Region
 
 4.3.  Manipulation of the LOCAL_PREF attribute
 
@@ -517,7 +517,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    |          | available.                                             |
    +----------+--------------------------------------------------------+
 
-             Table 8: Action: Preference Function Identifiers
+             Table 9: Action: Preference Function Identifiers
 
 4.3.1.  Global Manipulation of LOCAL_PREF
 
@@ -541,7 +541,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    to globally manipulate the LOCAL_PREF attribute for the route within
                                  AS 64497.
 
-              Table 9: Action: Global LOCAL_PREF Manipulation
+             Table 10: Action: Global LOCAL_PREF Manipulation
 
 4.3.2.  Location Based Manipulation of LOCAL_PREF
 
@@ -567,10 +567,10 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    |  Community   |                                                    |
    +--------------+----------------------------------------------------+
    | 64497:9:528  | Assign LOCAL_PREF for a customer backup route on   |
-   |              | IBGP speakers in the Netherlands                   |
-   | 64497:10:392 | Assign LOCAL_PREF for a peering route on IBGP      |
+   |              | BGP speakers in the Netherlands                    |
+   | 64497:10:392 | Assign LOCAL_PREF for a peering route on BGP       |
    |              | speakers in Japan                                  |
-   | 64497:12:840 | Assign LOCAL_PREF for a fallback route on IBGP     |
+   | 64497:12:840 | Assign LOCAL_PREF for a fallback route on BGP      |
    |              | speakers in United States of America               |
    +--------------+----------------------------------------------------+
 
@@ -579,7 +579,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    to selectively manipulate the LOCAL_PREF attribute within AS 64497 in
          the geographical region specified in the Parameter field.
 
-            Table 10: Action: Regional LOCAL_PREF Manipulation
+            Table 11: Action: Regional LOCAL_PREF Manipulation
 
 4.3.3.  Note of Caution for LOCAL_PREF Functions
 
