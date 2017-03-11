@@ -297,7 +297,7 @@
 
             <section title="Manipulation of the LOCAL_PREF attribute">
                 <t>
-                    As part of a agreement between AS 64497 and AS 64498, AS 64497 might expose BGP traffic engineering functions to AS 64498.
+                    As part of an agreement between AS 64497 and AS 64498, AS 64497 might expose BGP traffic engineering functions to AS 64498.
                     One such BGP traffic engineering function might allow AS 64498 to manipulate the value of the LOCAL_PREF attribute of routes learned from AS 64498 within AS 64497, even though the LOCAL_PREF attribute is non-transitive and therefore is not propagated to EBGP neighbors.
                 </t>
                 <t>
