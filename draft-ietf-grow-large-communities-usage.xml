@@ -241,8 +241,8 @@
                 </section>
                 <section title="Location Based Selective NO_EXPORT">
                     <t>
-                        AS 64497 could assign a value of 5 to the first Local Data field to designate the content of the second Local Data field as an ISO 3166-1 numeric country identifier within which a labeled route is not propagated to certain EBGP neighbors.
-                        This might however not prevent one of those EBGP neighbors from learning that route in another country and thereby making it available in the country specified by the BGP Large Community.
+                        AS 64497 could assign a value of 5 to the first Local Data field to designate the content of the second Local Data field as an ISO 3166-1 numeric country identifier within which a labeled route is not propagated to EBGP neighbors.
+                        However this might not prevent one of those EBGP neighbors from learning that route in another country and thereby making it available in the country specified by the BGP Large Community.
                     </t>
                     <texttable title="Action: NO_EXPORT in Region" anchor='action_region_no_export'>
                         <ttcol align='center'>BGP Large Community</ttcol>
