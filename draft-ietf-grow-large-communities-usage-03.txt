@@ -292,7 +292,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
           +---------------------+-------------------------------+
 
     Example documentation for Informational Communities deployed by AS
-    64497 to describe the location where a route was imported using M49
+   64497 to describe the location where a route was imported using M.49
     numeric codes published by the United Nations Statistics Division.
 
                     Table 3: Information: UNSD Regions
