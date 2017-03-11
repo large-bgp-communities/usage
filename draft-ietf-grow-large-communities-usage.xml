@@ -164,7 +164,7 @@
                 </t>
                 <section title="An ISO 3166-1 numeric function">
                     <t>
-                        AS 64497 could assign a value of 1 to the first Local Data field to designate the content of the second Local Data field as an ISO-3166-1 numeric country identifier. 
+                        AS 64497 could assign a value of 1 to the first Local Data field to designate the content of the second Local Data field as an <eref target="https://www.iso.org/iso-3166-country-codes.html">ISO-3166-1</a> numeric country identifier.
                     </t>
                     <texttable title="Information: ISO 3166-1" anchor='info_iso3166'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -177,9 +177,9 @@
                         </postamble>
                     </texttable>
                 </section>
-                <section title="A UNSD Region function">
+                <section title="A UN M.49 Region function">
                     <t>
-                        AS 64497 could assign a value of 2 to the first Local Data field to designate the content of the second Local Data field as the M49 numeric code published by the <eref target="http://unstats.un.org/unsd/methods/m49/m49regin.htm">United Nations Statistics Division (UNSD)</eref> for macro geographical (continental) regions, geographical sub-regions, or selected economic and other groupings.
+                        AS 64497 could assign a value of 2 to the first Local Data field to designate the content of the second Local Data field as the M.49 numeric code published by the <eref target="https://unstats.un.org/unsd/methodology/m49/">United Nations Statistics Division (UNSD)</eref> for macro geographical (continental) regions, geographical sub-regions, or selected economic and other groupings.
                     </t>
                     <texttable title="Information: UNSD Regions" anchor='info_regions'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -231,8 +231,8 @@
                     <texttable title="Action: ASN NO_EXPORT" anchor='action_asn_no_export'>
                         <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Description</ttcol>
-                        <c>64497:4:2914</c><c>Do not export route to AS 2914</c>
-                        <c>64497:4:7018</c><c>Do not export route to AS 7018</c>
+                        <c>64497:4:64498</c><c>Do not export route to AS 64498</c>
+                        <c>64497:4:64499</c><c>Do not export route to AS 64499</c>
                         <c>64497:4:65551</c><c>Do not export route to AS 65551</c>
                         <postamble>
                             Example documentation for Action Communities deployed by AS 64497 to expose a BGP traffic engineering function which selectively prevents the propagation of routes to the neighboring ASN specified in the second Local Data field.
@@ -270,8 +270,8 @@
                     <texttable title="Action: Prepend to ASN " anchor='action_peer_prepend'>
                         <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Description</ttcol>
-                        <c>64497:6:2914</c><c>Prepend 64497 once on export to AS 2914</c>
-                        <c>64497:6:7018</c><c>Prepend 64497 once on export to AS 7018</c>
+                        <c>64497:6:64498</c><c>Prepend 64497 once on export to AS 64498</c>
+                        <c>64497:6:64499</c><c>Prepend 64497 once on export to AS 64499</c>
                         <c>64497:6:65551</c><c>Prepend 64497 once on export to AS 65551</c>
                         <postamble>
                             Example documentation for Action Communities deployed by AS 64497 to expose a BGP traffic engineering function which selectively prepends the AS_PATH with AS 64497 when propagating the route to the specified EBGP neighbor. 
