@@ -133,7 +133,7 @@
                 </t>
                 <t>
                     The Global Administrator field is set to the ASN which labels the routes with the Informational Communities.
-                    For example, AS 64497 might add a community with the GA 64497 to a route accepted from an IBGP or EBGP neighbor as a means of signaling that it was imported in a certain geographical region.
+                    For example, AS 64497 might add a community with the GA 64497 to a route accepted from an IBGP or EBGP neighbor as a means of signalling that it was imported in a certain geographical region.
                 </t>
                 <t>
                     In general, the intended audiences of Informational Communities are downstream networks and the Global Administrator itself, but any Autonomous System could benefit from receiving these communities.
@@ -241,7 +241,7 @@
                 </section>
                 <section title="Location Based Selective NO_EXPORT">
                     <t>
-                        AS 64497 could assign a value of 5 to the first Local Data field to designate the content of the second Local Data field as an ISO 3166-1 numeric country identifier within which a labeled route is not progagated to certain EBGP neighbors.
+                        AS 64497 could assign a value of 5 to the first Local Data field to designate the content of the second Local Data field as an ISO 3166-1 numeric country identifier within which a labeled route is not propagated to certain EBGP neighbors.
                         This might however not prevent one of those EBGP neighbors from learning that route in another country and thereby making it available in the country specified by the BGP Large Community.
                     </t>
                     <texttable title="Action: NO_EXPORT in Region" anchor='action_region_no_export'>
@@ -302,7 +302,7 @@
                 </t>
                 <t>
                     The LOCAL_PREF value of routes are locally significant within each Autonomous System and therefore are impossible to list in this document.
-                    Instead, the typical LOCAL_PREF values could be classified as a heirarchy and a BGP Large Community function exposed allowing an EBGP neighbor to affect the LOCAL_PREF value within the specified GA.
+                    Instead, the typical LOCAL_PREF values could be classified as a hierarchy and a BGP Large Community function exposed allowing an EBGP neighbor to affect the LOCAL_PREF value within the specified GA.
                     The following non-exhaustive list defines the classes of routes in the order of descending LOCAL_PREF value and assigns a function identifier which could be used in the first Local Data field of a BGP Large Community.
                 </t>
                 <texttable title="Action: Preference Function Identifiers" anchor='action_pref_func'>
