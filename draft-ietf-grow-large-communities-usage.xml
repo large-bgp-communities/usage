@@ -85,19 +85,19 @@
         <section title="Introduction">
             <t>
                 <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between Autonomous Systems.
-                This document presents a set of examples of how Large BGP Communities could be utilised by an operator to achieve various goals.
-                This document draws from experience in Operational Communities such as <eref target="http://nanog.net">NANOG</eref> and <eref target="http://nlnog.net">NLNOG</eref>.
+                This document presents examples of how operators might utilise Large BGP Communities to achieve various goals.
+                This document draws from experience of operational communities such as <eref target="http://nanog.net">NANOG</eref> and <eref target="http://nlnog.net">NLNOG</eref>.
             </t>
         </section>
 
-        <section title="The Generic Design Pattern">
+        <section title="The Design Overview">
             <t>
                 Large BGP Communities are composed of three 4-octet fields.
-                The first is the Global Administrator field, whose value is the Autonomous System (ASN) that has defined the meaning of the remaining two 4-octet fields, the Local Data fields.
-                This document describes an approach defining these fields as "ASN:Function:Parameter".
+                The first is the Global Administrator (GA) field, whose value is the Autonomous System Number (ASN) of the Autonomous System (AS) that has defined the meaning of the remaining two 4-octet fields, known as the Local Data fields.
+                This document describes an approach to defining these fields as "ASN:Function:Parameter".
             </t>
             <t>
-                In contemporary deployments of both BGP Communities <xref target="RFC1997"/> and BGP Large Communities, functionality can be divided into two categories:
+                In contemporary deployments of both BGP Communities <xref target="RFC1997"/> and BGP Large Communities, the function of a community can be divided into two categories:
                 <list style="symbols">
                     <t>Informational Communities</t>
                     <t>Action Communities</t>
@@ -118,17 +118,17 @@
        |        | 
        `<->- AS 64499
 ]]></artwork></figure>
-                AS 64497 obtains transit services from AS 65551, a 32-bit ASN.
+                AS 64497 obtains transit services from (is a customer of) AS 65551, a 32-bit ASN.
                 AS 64497 provides transit services to both AS 64498 and AS 64499.
                 AS 64498 and AS 64499 maintain a peering relationship in which they only exchange their customer routes.
             </t>
             <t>
                 The opaque nature of BGP Large Communities allows for rapid deployment of new features or changes to products.
-                Operators are encouraged to publicly publish and maintain documentation of the purpose of each Large BGP Community, both informational and action, that they support or are visible in looking glasses.
+                Operators are encouraged to publicly publish and maintain documentation of the purpose of each Large BGP Community, both informational and action, that they support or are visible in BGP RIBs.
             </t>
             <section title="Informational Communities">
                 <t>
-                    Informational Communities are labels for attributes such as the origin of the route announcement, the nature of the relation with the EBGP neighbor or the intended propagation audience.
+                    Informational Communities are labels for attributes such as the origin of the route announcement, the nature of the relation with an EBGP neighbor or the intended propagation audience.
                     Informational Communities can also assist in providing valuable information for day-to-day network operations such as debugging or capacity planning.
                 </t>
                 <t>
@@ -142,14 +142,15 @@
 
             <section title="Action Communities">
                 <t>
-                    Action Communities are added as a label to request non-default treatment of a route by having the operator's defined routing policy adjust variables such as its propagation characteristics, the LOCAL_PREFERENCE, the next-hop, or the number of AS_PATH prepends to be added when exporting or importing a route to/from another AS.
+                    Action Communities are added as a label to request non-default treatment of a route within an AS.
+                    The operator of that AS defines routing policy which, based upon the communities, adjusts route attributes such as its propagation characteristics, the LOCAL_PREFERENCE, the next-hop, or the number of AS_PATH prepends to be added upon reception or propogation.
                 </t>
                 <t>
-                    The Global Administrator field is set to the ASN which has defined the functionality of that Large Community and is therefore expected to perform the action.
-                    For instance, AS 64499 might label a route with a Large Community containing GA 64497 to signal AS 64497 a request to perform a pre-defined action upon that route.
+                    The Global Administrator field is set to the ASN which has defined the functionality of that BGP Large Community and is therefore the ASN that is expected to perform the action.
+                    For instance, AS 64499 might label a route with a BGP Large Community containing GA 64497 to request that AS 64497 perform a pre-defined action upon that route.
                 </t>
                 <t>
-                    In general, the intended audiences of Action Communities are upstream providers and the Global Administrator itself, but in theory any AS could act as the audience if they are willing to do so.
+                    In general, the intended audience of Action Communities are transit providers taking action on behalf of a customer or the Global Administrator itself, but any AS could take action if they chose and any AS could add an action community with the GA of a non-adjacent ASN.
                 </t>
             </section>
         </section>
