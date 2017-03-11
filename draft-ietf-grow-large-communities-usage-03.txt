@@ -18,12 +18,6 @@ Abstract
    Examples and inspiration for operators for the use of BGP Large
    Communities.
 
-Requirements Language
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [RFC2119].
-
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
@@ -50,6 +44,12 @@ Copyright Notice
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
 
 
 
@@ -58,16 +58,10 @@ Snijders, et al.       Expires September 12, 2017               [Page 1]
 Internet-Draft       Usage of BGP Large Communities           March 2017
 
 
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
-
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  The Design Overview . . . . . . . . . . . . . . . . . . . . .   3
+   2.  The Design Overview . . . . . . . . . . . . . . . . . . . . .   2
      2.1.  Informational Communities . . . . . . . . . . . . . . . .   4
      2.2.  Action Communities  . . . . . . . . . . . . . . . . . . .   4
    3.  Examples of Informational Communities . . . . . . . . . . . .   5
@@ -103,17 +97,6 @@ Table of Contents
    achieve various goals.  This document draws from experience of
    operational communities such as NANOG [1] and NLNOG [2].
 
-
-
-
-
-
-
-Snijders, et al.       Expires September 12, 2017               [Page 2]
-
-Internet-Draft       Usage of BGP Large Communities           March 2017
-
-
 2.  The Design Overview
 
    BGP Large Communities are composed of three 4-octet fields.  The
@@ -123,21 +106,29 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    "Local Data Part 1" and "Local Data Part 2".  This document describes
    an approach defining the Local Data fields as following: the "Local
    Data Part 1" field contains a function identifier, the "Local Data
+
+
+
+Snijders, et al.       Expires September 12, 2017               [Page 2]
+
+Internet-Draft       Usage of BGP Large Communities           March 2017
+
+
    Part 2" contains a parameter value.  Using the canonical notation the
    above can be summarized as "ASN:Function:Parameter".
 
    +------------------------+---------------------+
    |         RFC 8092       |    this document    |
    +------------------------+---------------------+
-   |  Global Administrator  |          ASN        |
+   |  Global Administrator  |         ASN         |
    +------------------------+---------------------+
    |    Local Data Part 1   |       Function      |
    +------------------------+---------------------+
    |    Local Data Part 2   |       Parameter     |
    +------------------------+---------------------+
 
-      A mapping for usage of fields in BGP Large Communities between
-                       [RFC8092] and this document.
+      A mapping table on the usage of fields in BGP Large Communities
+                   between [RFC8092] and this document.
 
    In contemporary deployments of both BGP Communities [RFC1997] and BGP
    Large Communities, the function of a community can be divided into
@@ -163,13 +154,6 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
           |        |
           `<->- AS 64499
 
-
-
-Snijders, et al.       Expires September 12, 2017               [Page 3]
-
-Internet-Draft       Usage of BGP Large Communities           March 2017
-
-
    AS 64497 obtains transit services from (is a customer of) AS 65551, a
    32-bit ASN.  AS 64497 provides transit services to both AS 64498 and
    AS 64499.  AS 64498 and AS 64499 maintain a peering relationship in
@@ -178,6 +162,14 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    The opaque nature of BGP Large Communities allows for rapid
    deployment of new features or changes to products.  Operators are
    encouraged to publicly publish and maintain documentation of the
+
+
+
+Snijders, et al.       Expires September 12, 2017               [Page 3]
+
+Internet-Draft       Usage of BGP Large Communities           March 2017
+
+
    purpose of each BGP Large Community, both informational and action,
    that they support or are visible in BGP RIBs.
 
@@ -218,6 +210,14 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    providers taking action on behalf of a customer or the Global
    Administrator itself, but any AS could take action if they chose and
    any AS could add an action community with the GA of a non-adjacent
+   ASN.  However, note that an Action Community could also be
+   informational.  Its presence is an indicator that the GA may have
+   performed the action and that an AS in the AS_PATH requested it.
+
+
+
+
+
 
 
 
@@ -225,10 +225,6 @@ Snijders, et al.       Expires September 12, 2017               [Page 4]
 
 Internet-Draft       Usage of BGP Large Communities           March 2017
 
-
-   ASN.  However, note that an Action Community could also be
-   informational.  Its presence is an indicator that the GA may have
-   performed the action and that an AS in the AS_PATH requested it.
 
 3.  Examples of Informational Communities
 
@@ -267,6 +263,10 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    by the United Nations Statistics Division (UNSD) [4] for macro
    geographical (continental) regions, geographical sub-regions, or
    selected economic and other groupings.
+
+
+
+
 
 
 
@@ -626,11 +626,6 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
               Attribute", RFC 1997, DOI 10.17487/RFC1997, August 1996,
               <http://www.rfc-editor.org/info/rfc1997>.
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <http://www.rfc-editor.org/info/rfc2119>.
-
    [RFC4264]  Griffin, T. and G. Huston, "BGP Wedgies", RFC 4264,
               DOI 10.17487/RFC4264, November 2005,
               <http://www.rfc-editor.org/info/rfc4264>.
@@ -663,6 +658,11 @@ Authors' Addresses
    The Netherlands
 
    Email: job@ntt.net
+
+
+
+
+
 
 
 
