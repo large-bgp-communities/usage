@@ -122,7 +122,7 @@
                 AS 64498 and AS 64499 maintain a peering relationship in which they only exchange their customer routes.
             </t>
             <t>
-                The opaque nature of BGP Large Communities allows for rapid deployment of new features or changes to routing polices that perform an action.
+                The opaque nature of BGP Large Communities allows for rapid deployment of new features or changes to their routing policy that perform an action.
                 Operators are encouraged to publicly publish and maintain documentation on the purpose of each BGP Large Community, both informational and action, that they support or are visible in BGP RIBs.
             </t>
             <section title="Informational Communities">
@@ -358,7 +358,7 @@
             <section title="Route Server Prefix Distribution Control">
                 <t>
                     Route Servers <xref target="RFC7947"/> use BGP to broker network reachability information among their clients.
-                    As not all route server clients may wish to interconnect with each other, the route server operator will usually implement a mechanism to allow each client to control the route server's export routing policies, as described in Section 4.6 of <xref target="RFC7948"/>.
+                    As not all route server clients may wish to interconnect with each other, the route server operator will usually implement a mechanism to allow each client to control the route server's export routing policy, as described in Section 4.6 of <xref target="RFC7948"/>.
                     One widely-used mechanism is a route server specific adaption of <xref target="selective_noexport">"ASN Based Selective NO_EXPORT"</xref>.
                 </t>
                 <t>
