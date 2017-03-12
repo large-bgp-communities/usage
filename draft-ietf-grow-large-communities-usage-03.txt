@@ -104,8 +104,8 @@ Table of Contents
    Autonomous System Number (ASN) of the Autonomous System (AS) that has
    defined the meaning of the remaining two 4-octet fields, known as
    "Local Data Part 1" and "Local Data Part 2".  This document describes
-   an approach defining the Local Data fields as following: the "Local
-   Data Part 1" field contains a function identifier, the "Local Data
+   an approach where the "Local Data Part 1" field contains a function
+   identifier and the "Local Data Part 2" contains a parameter value.
 
 
 
@@ -114,8 +114,8 @@ Snijders, et al.       Expires September 13, 2017               [Page 2]
 Internet-Draft       Usage of BGP Large Communities           March 2017
 
 
-   Part 2" contains a parameter value.  Using the canonical notation the
-   above can be summarized as "ASN:Function:Parameter".
+   Using the canonical notation the above can be summarized as
+   "ASN:Function:Parameter".
 
                  +----------------------+---------------+
                  |       RFC 8092       | this document |
