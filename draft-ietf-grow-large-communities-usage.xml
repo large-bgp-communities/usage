@@ -154,6 +154,9 @@
                     However, note that an Action Community could also be informational.
                     Its presence is an indicator that the GA may have performed the action and that an AS in the AS_PATH requested it.
                 </t>
+                <t>
+                    Operators are recommended to publish the order in which BGP Communities and BGP Large Communities are processed in relation to each other in their routing policy.
+                </t>
             </section>
         </section>
 
@@ -224,7 +227,7 @@
                     As part of an agreement, often a commercial transit agreement, between AS 64497 and AS 64498, AS 64497 might expose BGP traffic engineering functions to AS 64498.
                     One such BGP traffic engineering function could be selective NO_EXPORT, which is the selective filtering of a route learned from one AS, AS 64498, to certain EBGP neighbors of the GA, AS 64497.
                 </t>
-                <section title="ASN Based Selective NO_EXPORT">
+                <section anchor="selective_noexport" title="ASN Based Selective NO_EXPORT">
                     <t>
                         AS 64497 could assign a value of 4 to the Function field to designate the content of the Parameter field as a neighboring ASN to which a route should not be propagated.
                     </t>
@@ -357,10 +360,10 @@
                 <t>
                     Route Servers <xref target="RFC7947"/> use BGP to broker network reachability information amongst their clients.
                     As not all route server clients may wish to interconnect with each other, the route server operator will usually implement a mechanism to allow each client to control the route server's export routing policies, as described in Section 4.6 of <xref target="RFC7948"/>.
-                    One widely-used mechanism is client-activated BGP communities.
+                    One widely-used mechanism is a route server specific adaption of <xref target="selective_noexport">"ASN Based Selective NO_EXPORT"</xref>.
                 </t>
                 <t>
-                    A sample BGP Large Communities policy which enables client-controlled prefix distribution for a sample route server using AS 64497 is outlined as follows:
+                    A sample BGP Large Communities policy which enables client-controlled prefix distribution for a route server operating as AS 64497, is outlined as follows:
                 </t>
                 <texttable title="Action: Route Server prefix distribution control" anchor='action_rs_distribution'>
                     <ttcol align='left'>BGP Large Community</ttcol>
