@@ -154,7 +154,7 @@
                     Its presence is an indicator that the GA may have performed the action and that an AS in the AS_PATH requested it.
                 </t>
                 <t>
-                    Operators are recommended to publish the relative order in which Action Communities (both BGP Communities and BGP Large Communities) are processed in their routing policies.
+                    Operators are recommended to publish the relative order in which Action Communities (both BGP Communities and BGP Large Communities) are processed in their routing policy.
                 </t>
             </section>
         </section>
