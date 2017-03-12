@@ -95,7 +95,7 @@ Table of Contents
 
    BGP Large Communities [RFC8092] provide a mechanism to signal opaque
    information between Autonomous Systems (ASs).  This document presents
-   examples of how operators might utilise BGP Large Communities to
+   examples of how operators might utilize BGP Large Communities to
    achieve various goals.  This document draws on the experience of
    operator communities such as NANOG [1] and NLNOG [2].
 
@@ -160,8 +160,8 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    which they only exchange their customer routes.
 
    The opaque nature of BGP Large Communities allows for rapid
-   deployment of new features or changes to routing polices that perform
-   an action.  Operators are encouraged to publicly publish and maintain
+   deployment of new features or changes to their routing policy that
+   perform an action.  Operators are encouraged to publicly publish and
 
 
 
@@ -170,9 +170,9 @@ Snijders, et al.       Expires September 13, 2017               [Page 3]
 Internet-Draft       Usage of BGP Large Communities           March 2017
 
 
-   documentation on the purpose of each BGP Large Community, both
-   informational and action, that they support or are visible in BGP
-   RIBs.
+   maintain documentation on the purpose of each BGP Large Community,
+   both informational and action, that they support or are visible in
+   BGP RIBs.
 
 2.1.  Informational Communities
 
@@ -424,7 +424,7 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    AS 64497 could assign a value of 6 to the Function field to designate
    the content of the Parameter field as a neighboring ASN to which
    prepending of the AS_PATH with AS 64497 is requested on propagation
-   of the route.  Additional AS_PATH Prepending functions might also be
+   of the route.  Additional AS_PATH prepending functions might also be
    defined to support multiples of prepending, that is two, three or
    more prepends of AS 64497.
 
@@ -597,8 +597,8 @@ Internet-Draft       Usage of BGP Large Communities           March 2017
    information among their clients.  As not all route server clients may
    wish to interconnect with each other, the route server operator will
    usually implement a mechanism to allow each client to control the
-   route server's export routing policies, as described in Section 4.6
-   of [RFC7948].  One widely-used mechanism is a route server specific
+   route server's export routing policy, as described in Section 4.6 of
+   [RFC7948].  One widely-used mechanism is a route server specific
    adaption of "ASN Based Selective NO_EXPORT" (Section 4.1.1).
 
    An example BGP Large Communities policy which enables client-
