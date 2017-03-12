@@ -409,10 +409,10 @@
         <references title="Normative References">
             <?rfc include="reference.RFC.1997"?>
             <?rfc include="reference.RFC.7454"?>
-            <?rfc include="reference.RFC.4264"?>
             <?rfc include="reference.RFC.8092"?>
         </references>
         <references title="Informative References">
+            <?rfc include="reference.RFC.4264"?>
             <?rfc include="reference.RFC.7947"?>
             <?rfc include="reference.RFC.7948"?>
         </references>
