@@ -75,7 +75,7 @@
         <section title="Introduction">
             <t>
                 <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between Autonomous Systems (ASs).
-                This document presents examples of how operators might utilise BGP Large Communities to achieve various goals.
+                This document presents examples of how operators might utilize BGP Large Communities to achieve various goals.
                 This document draws on the experience of operator communities such as <eref target="https://www.nanog.org">NANOG</eref> and <eref target="https://nlnog.net">NLNOG</eref>.
             </t>
         </section>
@@ -267,7 +267,7 @@
                 <section title="ASN Based Selective AS_PATH Prepending">
                     <t>
                         AS 64497 could assign a value of 6 to the Function field to designate the content of the Parameter field as a neighboring ASN to which prepending of the AS_PATH with AS 64497 is requested on propagation of the route.
-                        Additional AS_PATH Prepending functions might also be defined to support multiples of prepending, that is two, three or more prepends of AS 64497.
+                        Additional AS_PATH prepending functions might also be defined to support multiples of prepending, that is two, three or more prepends of AS 64497.
                     </t>
                     <texttable title="Action: Prepend to ASN " anchor='action_peer_prepend'>
                         <ttcol align='center'>BGP Large Community</ttcol>
