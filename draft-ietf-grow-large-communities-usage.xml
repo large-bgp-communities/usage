@@ -85,7 +85,7 @@
             <t>
                 BGP Large Communities are composed of three 4-octet fields.
                 The first is the Global Administrator (GA) field, whose value is the Autonomous System Number (ASN) of the Autonomous System (AS) that has defined the meaning of the remaining two 4-octet fields, known as "Local Data Part 1" and "Local Data Part 2".
-                This document describes an approach defining the Local Data fields as following: the "Local Data Part 1" field contains a function identifier, the "Local Data Part 2" contains a parameter value.
+                This document describes an approach where the "Local Data Part 1" field contains a function identifier and the "Local Data Part 2" contains a parameter value.
                 Using the canonical notation the above can be summarized as "ASN:Function:Parameter".
             </t>
 <texttable title="Field mapping" anchor='fieldmap'>
