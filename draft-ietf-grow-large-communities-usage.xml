@@ -65,7 +65,7 @@
 
         <abstract>
             <t>
-                Examples and inspiration for operators for the use of BGP Large
+                Examples and inspiration for operators to use BGP Large
                 Communities.
             </t>
         </abstract>
@@ -75,20 +75,20 @@
     <middle>
         <section title="Introduction">
             <t>
-                <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between Autonomous Systems.
+                <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between Autonomous Systems (ASs).
                 This document presents examples of how operators might utilise BGP Large Communities to achieve various goals.
-                This document draws from experience of operational communities such as <eref target="http://nanog.net">NANOG</eref> and <eref target="http://nlnog.net">NLNOG</eref>.
+                This document draws on the experience of operator communities such as <eref target="https://www.nanog.org">NANOG</eref> and <eref target="https://nlnog.net">NLNOG</eref>.
             </t>
         </section>
 
         <section title="The Design Overview">
             <t>
                 BGP Large Communities are composed of three 4-octet fields.
-                The first is the Global Administrator (GA) field, whose value is the Autonomous System Number (ASN) of the Autonomous System (AS) that has defined the meaning of the remaining two 4-octet fields, known as "Local Data Part 1" and "Local Data Part 2".
+                The first is the Global Administrator (GA) field, whose value is the Autonomous System Number (ASN) of the AS that has defined the meaning of the remaining two 4-octet fields, known as "Local Data Part 1" and "Local Data Part 2".
                 This document describes an approach where the "Local Data Part 1" field contains a function identifier and the "Local Data Part 2" contains a parameter value.
-                Using the canonical notation the above can be summarized as "ASN:Function:Parameter".
+                Using the canonical notation this format can be summarized as "ASN:Function:Parameter".
             </t>
-<texttable title="Field mapping" anchor='fieldmap'>
+<texttable title="Field Mapping" anchor='fieldmap'>
     <ttcol align='center'>RFC 8092</ttcol>
     <ttcol align='center'>this document</ttcol>
     <c>Global Administrator</c><c>ASN</c>
@@ -104,7 +104,7 @@
                 </list>
             </t>
             <t>
-                Throughout the document a topology of four Autonomous Systems is used to illustrate the usage of Communities in the following configuration:
+                Throughout the document a topology of four ASs is used to illustrate the usage of communities in the following configuration:
 <figure align="center"><artwork><![CDATA[
         AS 65551
             |
@@ -118,13 +118,13 @@
        |        | 
        `<->- AS 64499
 ]]></artwork></figure>
-                AS 64497 obtains transit services from (is a customer of) AS 65551, a 32-bit ASN.
+                AS 64497 obtains transit services from (is a customer of) AS 65551, a 4-octet ASN.
                 AS 64497 provides transit services to both AS 64498 and AS 64499.
                 AS 64498 and AS 64499 maintain a peering relationship in which they only exchange their customer routes.
             </t>
             <t>
-                The opaque nature of BGP Large Communities allows for rapid deployment of new features or changes to products.
-                Operators are encouraged to publicly publish and maintain documentation of the purpose of each BGP Large Community, both informational and action, that they support or are visible in BGP RIBs.
+                The opaque nature of BGP Large Communities allows for rapid deployment of new features or changes to routing polices that perform an action.
+                Operators are encouraged to publicly publish and maintain documentation on the purpose of each BGP Large Community, both informational and action, that they support or are visible in BGP RIBs.
             </t>
             <section title="Informational Communities">
                 <t>
@@ -136,26 +136,26 @@
                     For example, AS 64497 might add a community with the GA 64497 to a route accepted from an IBGP or EBGP neighbor as a means of signaling that it was imported in a certain geographical region.
                 </t>
                 <t>
-                    In general, the intended audiences of Informational Communities are downstream networks and the Global Administrator itself, but any Autonomous System could benefit from receiving these communities.
+                    In general, the intended audiences of Informational Communities are downstream networks and the Global Administrator itself, but any AS could benefit from receiving these communities.
                 </t>
             </section>
 
             <section title="Action Communities">
                 <t>
-                    Action Communities are added as a label to request non-default treatment of a route within an AS.
-                    The operator of that AS defines routing policy which, based upon the communities, adjusts route attributes such as its propagation characteristics, the LOCAL_PREF (local preference), the next-hop, or the number of AS_PATH prepends to be added upon reception or propagation.
+                    Action Communities are added as a label to request that a route be treated in a particular way within an AS.
+                    The operator of the AS defines a routing policy that adjusts path attributes based on the community.  For example, the route's propagation characteristics, the LOCAL_PREF (local preference), the next-hop, or the number of AS_PATH prepends to be added when it is received or propagated can be changed.
                 </t>
                 <t>
-                    The Global Administrator field is set to the ASN which has defined the functionality of that BGP Large Community and is therefore the ASN that is expected to perform the action.
-                    For instance, AS 64499 might label a route with a BGP Large Community containing GA 64497 to request that AS 64497 perform a pre-defined action upon that route.
+                    The Global Administrator field is set to the ASN which has defined the functionality of that BGP Large Community and is the ASN that is expected to perform the action.
+                    For example, AS 64499 might label a route with a BGP Large Community containing GA 64497 to request that AS 64497 perform a pre-defined action on that route.
                 </t>
                 <t>
-                    In general, the intended audience of Action Communities are transit providers taking action on behalf of a customer or the Global Administrator itself, but any AS could take action if they chose and any AS could add an action community with the GA of a non-adjacent ASN.
+                    In general, the intended audience of Action Communities are transit providers taking action on behalf of a customer or the Global Administrator itself, but any AS could take action if they choose and any AS could add an Action Community with the GA of a non-adjacent ASN.
                     However, note that an Action Community could also be informational.
                     Its presence is an indicator that the GA may have performed the action and that an AS in the AS_PATH requested it.
                 </t>
                 <t>
-                    Operators are recommended to publish the relative order in which Action Communities (both BGP Communities and BGP Large Communities) are processed in their routing policy.
+                    Operators are recommended to publish the relative order in which Action Communities (both BGP Communities and BGP Large Communities) are processed in their routing policies.
                 </t>
             </section>
         </section>
@@ -163,9 +163,9 @@
         <section title="Examples of Informational Communities">
             <section title="Location">
                 <t>
-                    An AS, AS 64497 in these examples, may inform other networks about the geographical region where AS 64497 imported a route by labeling it with BGP Large Communities following one of the following schemes or a combination thereof.
+                    An AS, AS 64497 in these examples, may inform other networks about the geographical region where AS 64497 imported a route by labeling it with BGP Large Communities following one of the following schemes or a combination of them.
                 </t>
-                <section title="An ISO 3166-1 numeric function">
+                <section title="An ISO 3166-1 Numeric Function">
                     <t>
                         AS 64497 could assign a value of 1 to the Function field to designate the content of the Parameter field as an <eref target="https://www.iso.org/iso-3166-country-codes.html">ISO-3166-1</eref> numeric country identifier.
                     </t>
@@ -180,7 +180,7 @@
                         </postamble>
                     </texttable>
                 </section>
-                <section title="A UN M.49 Region function">
+                <section title="A UN M.49 Region Function">
                     <t>
                         AS 64497 could assign a value of 2 to the Function field to designate the content of the Parameter field as the M.49 numeric code published by the <eref target="https://unstats.un.org/unsd/methodology/m49/">United Nations Statistics Division (UNSD)</eref> for macro geographical (continental) regions, geographical sub-regions, or selected economic and other groupings.
                     </t>
@@ -245,7 +245,7 @@
                 <section title="Location Based Selective NO_EXPORT">
                     <t>
                         AS 64497 could assign a value of 5 to the Function field to designate the content of the Parameter field as an ISO 3166-1 numeric country identifier within which a labeled route is not propagated to EBGP neighbors.
-                        However this might not prevent one of those EBGP neighbors from learning that route in another country and thereby making it available in the country specified by the BGP Large Community.
+                        However, this might not prevent one of those EBGP neighbors from learning that route in another country and making it available in the country specified by the BGP Large Community.
                     </t>
                     <texttable title="Action: NO_EXPORT in Region" anchor='action_region_no_export'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -267,7 +267,7 @@
                 </t>
                 <section title="ASN Based Selective AS_PATH Prepending">
                     <t>
-                        AS 64497 could assign a value of 6 to the Function field to designate the content of the Parameter field as a neighboring ASN to which prepending of the AS_PATH with AS 64497 is requested upon propagation of the route.
+                        AS 64497 could assign a value of 6 to the Function field to designate the content of the Parameter field as a neighboring ASN to which prepending of the AS_PATH with AS 64497 is requested on propagation of the route.
                         Additional AS_PATH Prepending functions might also be defined to support multiples of prepending, that is two, three or more prepends of AS 64497.
                     </t>
                     <texttable title="Action: Prepend to ASN " anchor='action_peer_prepend'>
@@ -283,7 +283,7 @@
                 </section>
                 <section title="Location Based Selective AS_PATH Prepending">
                     <t>
-                        AS 64497 could assign a value of 7 to the Function field to designate the content of the Parameter field as an ISO 3166-1 numeric country identifier to which the prepending of the AS_PATH with AS 64497 is requested upon propagation of the route to all EBGP neighbors in that region.
+                        AS 64497 could assign a value of 7 to the Function field to designate the content of the Parameter field as an ISO 3166-1 numeric country identifier to which the prepending of the AS_PATH with AS 64497 is requested on propagation of the route to all EBGP neighbors in that region.
                     </t>
                     <texttable title="Action: Prepend in Region" anchor='action_region_prepend'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -298,28 +298,28 @@
                 </section>
             </section>
 
-            <section title="Manipulation of the LOCAL_PREF attribute">
+            <section title="Manipulation of the LOCAL_PREF Attribute">
                 <t>
                     As part of an agreement between AS 64497 and AS 64498, AS 64497 might expose BGP traffic engineering functions to AS 64498.
-                    One such BGP traffic engineering function might allow AS 64498 to manipulate the value of the LOCAL_PREF attribute of routes learned from AS 64498 within AS 64497, even though the LOCAL_PREF attribute is non-transitive and therefore is not propagated to EBGP neighbors.
+                    One such BGP traffic engineering function might allow AS 64498 to manipulate the value of the LOCAL_PREF attribute of routes learned from AS 64498 within AS 64497, even though the LOCAL_PREF attribute is non-transitive and is not propagated to EBGP neighbors.
                 </t>
                 <t>
-                    The LOCAL_PREF value of routes are locally significant within each Autonomous System and therefore are impossible to list in this document.
+                    The LOCAL_PREF value of routes are locally significant within each AS and are impossible to list in this document.
                     Instead, the typical LOCAL_PREF values could be classified as a hierarchy and a BGP Large Community function exposed allowing an EBGP neighbor to affect the LOCAL_PREF value within the specified GA.
-                    The following non-exhaustive list defines the classes of routes in the order of descending LOCAL_PREF value and assigns a function identifier which could be used in the Function field of a BGP Large Community.
+                    The following example list defines the classes of routes in the order of descending LOCAL_PREF value and assigns a function identifier which could be used in the Function field of a BGP Large Community.
                 </t>
                 <texttable title="Action: Preference Function Identifiers" anchor='action_pref_func'>
                     <ttcol align='center'>Function</ttcol>
                     <ttcol align='left'>Preference Class</ttcol>
-                    <c>8</c><c>Normal customer route.</c>
-                    <c>9</c><c>Backup customer route.</c>
-                    <c>10</c><c>Peering route.</c>
-                    <c>11</c><c>Upstream transit route.</c>
-                    <c>12</c><c>Fallback route, to be installed if no other path is available.</c>
+                    <c>8</c><c>Normal customer route</c>
+                    <c>9</c><c>Backup customer route</c>
+                    <c>10</c><c>Peering route</c>
+                    <c>11</c><c>Upstream transit route</c>
+                    <c>12</c><c>Fallback route, to be installed if no other path is available</c>
                 </texttable>
                 <section title="Global Manipulation of LOCAL_PREF">
                     <t>
-                        AS 64497 could place one of the previously defined Preference Function Identifiers in the Function field and set the value 0 in the Parameter field to designate that the LOCAL_PREF associated with that function identifier should be applied for that route throughout the whole Autonomous System.
+                        AS 64497 could place one of the previously defined Preference Function Identifiers in the Function field and set the value 0 in the Parameter field to designate that the LOCAL_PREF associated with that function identifier should be applied for that route throughout the whole AS.
                     </t>
                     <texttable title="Action: Global LOCAL_PREF Manipulation" anchor='action_pref_global'>
                         <ttcol align='center'>BGP Large Community</ttcol>
@@ -351,43 +351,43 @@
                 <section title="Note of Caution for LOCAL_PREF Functions">
                 <t>
                     The LOCAL_PREF attribute strongly influences the BGP Decision Process, which in turn affects the scope of route propagation.
-                    Therefore, Operators should take special care when using Action Communities that decrease the LOCAL_PREF value, and therefore the degree of preference, to a value below that of another route class.
+                    Operators should take special care when using Action Communities that decrease the LOCAL_PREF value, and the degree of preference, to a value below that of another route class.
                     Some of the unintended BGP states that might arise as a result of these traffic engineering decisions are described as "BGP Wedgies" in <xref target="RFC4264"/>.
                 </t>
                 </section>
             </section>
             <section title="Route Server Prefix Distribution Control">
                 <t>
-                    Route Servers <xref target="RFC7947"/> use BGP to broker network reachability information amongst their clients.
+                    Route Servers <xref target="RFC7947"/> use BGP to broker network reachability information among their clients.
                     As not all route server clients may wish to interconnect with each other, the route server operator will usually implement a mechanism to allow each client to control the route server's export routing policies, as described in Section 4.6 of <xref target="RFC7948"/>.
                     One widely-used mechanism is a route server specific adaption of <xref target="selective_noexport">"ASN Based Selective NO_EXPORT"</xref>.
                 </t>
                 <t>
-                    A sample BGP Large Communities policy which enables client-controlled prefix distribution for a route server operating as AS 64497, is outlined as follows:
+                    An example BGP Large Communities policy which enables client-controlled prefix distribution for a route server operating as AS 64497, is outlined as follows:
                 </t>
-                <texttable title="Action: Route Server prefix distribution control" anchor='action_rs_distribution'>
+                <texttable title="Action: Route Server Prefix Distribution Control" anchor='action_rs_distribution'>
                     <ttcol align='left'>BGP Large Community</ttcol>
                     <ttcol align='left'>Description</ttcol>
-                    <c>64497:0:peer-as</c><c>explicitly prevent announcement of route to peer-as</c>
-                    <c>64497:1:peer-as</c><c>explicitly announce route to peer-as</c>
-                    <c>64497:0:0</c><c>do not announce route to any peers by default</c>
-                    <c>64497:1:0</c><c>announce route to all peers by default</c>
+                    <c>64497:0:peer-as</c><c>Explicitly prevent announcement of route to peer-as</c>
+                    <c>64497:1:peer-as</c><c>Explicitly announce route to peer-as</c>
+                    <c>64497:0:0</c><c>Do not announce route to any peers by default</c>
+                    <c>64497:1:0</c><c>Announce route to all peers by default</c>
                 </texttable>
                 <t>
                     Multiple BGP Large Community values can be used together to implement fine-grained route distribution control.
                     For example, route server client AS 64500 might wish to use a route server for interconnecting to all other clients except AS 64510.
-                    In this case, they would tag all their outbound routes to the route server with 64497:1:0 (to announce to all clients by default) and 64497:1:64510 (to prevent announcement to AS 64510).
+                    In this case, they would label all their outbound routes to the route server with 64497:1:0 (to announce to all clients by default) and 64497:1:64510 (to prevent announcement to AS 64510).
                 </t>
                 <t>
                     Alternatively, route server client AS 64501 may have a selective routing policy and may wish to interconnect with only AS 64505 and AS 64506.
-                    This could be implemented by announcing routes tagged with 64497:0:0 (blocking all distribution by default) and 64497:1:64505, 64497:1:64506 to instruct the route server to force announcement to those two ASNs.
+                    This could be implemented by announcing routes labeled with 64497:0:0 (blocking all distribution by default) and 64497:1:64505, 64497:1:64506 to instruct the route server to force announcement to those two ASNs.
                 </t>
             </section>
         </section>
 
         <section title="Security Considerations">
             <t>
-                Network operators should note the recommendations in Section 11 of BGP Operations and Security <xref target="RFC7454"/>.
+                Operators should note the recommendations in Section 11 of BGP Operations and Security <xref target="RFC7454"/>.
             </t>
         </section>
 
@@ -399,7 +399,7 @@
 
         <section title="Acknowledgments">
             <t>
-                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, Nick Hilliard, and Will Hargrave.
+                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, Greg Hankins, Nick Hilliard, and Will Hargrave.
             </t>
         </section>
 
