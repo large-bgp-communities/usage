@@ -353,6 +353,28 @@
                 </t>
                 </section>
             </section>
+            <section title="Route Server Prefix Distribution Control">
+                <t>
+                    Internet Route Servers <xref target="RFC7947"/> use BGP to broker network reachability information amongst their clients.  As not all route server clients may wish to interconnect with each other, the route server operator will usually implement a mechanism to allow each client to control the route server's export routing policies, as described in Section 4.6 of <xref target="RFC7948"/>.  One widely-used mechanism is client-activated BGP communities.
+                </t>
+                <t>
+                    A sample BGP Large Communities policy which enables client-controlled prefix distribution for a sample route server using AS64497 is outlined as follows:
+                </t>
+                <texttable title="Action: Route Server prefix distribution control" anchor='action_rs_distribution'>
+                    <ttcol align='center'>BGP Large Community</ttcol>
+                    <ttcol align='left'>Description</ttcol>
+                    <c>64497:0:peer-as</c><c>explicitly prevent announcement of route to peer-as</c>
+                    <c>64497:1:peer-as</c><c>explicitly announce route to peer-as</c>
+                    <c>64497:0:0</c><c>don't announce route to peers by default</c>
+                    <c>64497:1:0</c><c>announce route to all peers by default</c>
+                </texttable>
+                <t>
+                    Multiple BGP Large Community values can be used together to implement fine-grained route distribution control.  For example, route server client AS64500 might wish to use a route server for interconnecting to all other clients except AS64510.  In this case, they would tag all their outbound routes to the route server with 64497:1:0 (to announce to all clients by default) and 64497:1:64510 (to prevent announcement to AS64510).
+                </t>
+                <t>
+                    Alternatively, route server client AS64501 may have a selective routing policy and may wish to interconnect with only AS64505 and AS64506. This could be implemeted by announcing routes tagged with 64497:0:0 (blocking all distribution by default) and 64497:1:64505, 64497:1:64506 to instruct the route server to force announcement to those two ASNs.
+                </t>
+            </section>
         </section>
 
         <section title="Security Considerations">
@@ -369,7 +391,7 @@
 
         <section title="Acknowledgments">
             <t>
-                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, and Will Hargrave.
+                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, Nick Hilliard, and Will Hargrave.
             </t>
         </section>
 
@@ -382,9 +404,9 @@
             <?rfc include="reference.RFC.4264"?>
             <?rfc include="reference.RFC.8092"?>
         </references>
-<!--
-            <references title="Informative References">
-            </references>
--->
-        </back>
-    </rfc>
+        <references title="Informative References">
+            <?rfc include="reference.RFC.7947"?>
+            <?rfc include="reference.RFC.7948"?>
+        </references>
+    </back>
+</rfc>
