@@ -360,7 +360,7 @@
                     One widely-used mechanism is client-activated BGP communities.
                 </t>
                 <t>
-                    A sample BGP Large Communities policy which enables client-controlled prefix distribution for a sample route server using AS64497 is outlined as follows:
+                    A sample BGP Large Communities policy which enables client-controlled prefix distribution for a sample route server using AS 64497 is outlined as follows:
                 </t>
                 <texttable title="Action: Route Server prefix distribution control" anchor='action_rs_distribution'>
                     <ttcol align='left'>BGP Large Community</ttcol>
@@ -372,11 +372,11 @@
                 </texttable>
                 <t>
                     Multiple BGP Large Community values can be used together to implement fine-grained route distribution control.
-                    For example, route server client AS64500 might wish to use a route server for interconnecting to all other clients except AS64510.
-                    In this case, they would tag all their outbound routes to the route server with 64497:1:0 (to announce to all clients by default) and 64497:1:64510 (to prevent announcement to AS64510).
+                    For example, route server client AS 64500 might wish to use a route server for interconnecting to all other clients except AS 64510.
+                    In this case, they would tag all their outbound routes to the route server with 64497:1:0 (to announce to all clients by default) and 64497:1:64510 (to prevent announcement to AS 64510).
                 </t>
                 <t>
-                    Alternatively, route server client AS64501 may have a selective routing policy and may wish to interconnect with only AS64505 and AS64506.
+                    Alternatively, route server client AS 64501 may have a selective routing policy and may wish to interconnect with only AS 64505 and AS 64506.
                     This could be implemeted by announcing routes tagged with 64497:0:0 (blocking all distribution by default) and 64497:1:64505, 64497:1:64506 to instruct the route server to force announcement to those two ASNs.
                 </t>
             </section>
