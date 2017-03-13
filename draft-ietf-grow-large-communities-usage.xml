@@ -12,7 +12,7 @@
 <?rfc subcompact="no"?>
 <rfc category="info" docName="draft-ietf-grow-large-communities-usage-04" ipr="trust200902">
     <front>
-        <title>Usage of BGP Large Communities</title>
+        <title>Use of BGP Large Communities</title>
 
         <author fullname="Job Snijders" initials="J." surname="Snijders">
             <organization abbrev="NTT">NTT Communications</organization>
@@ -93,7 +93,7 @@
     <c>Global Administrator</c><c>ASN</c>
     <c>Local Data Part 1</c><c>Function</c>
     <c>Local Data Part 2</c><c>Parameter</c>
-    <postamble>A mapping table on the usage of fields in BGP Large Communities between <xref target="RFC8092"/> and this document.</postamble>
+    <postamble>A mapping table on the use of fields in BGP Large Communities between <xref target="RFC8092"/> and this document.</postamble>
 </texttable>
             <t>
                 In contemporary deployments of both BGP Communities <xref target="RFC1997"/> and BGP Large Communities, the function of a community can be divided into two categories:
@@ -103,7 +103,7 @@
                 </list>
             </t>
             <t>
-                Throughout the document a topology of four ASs is used to illustrate the usage of communities in the following configuration:
+                Throughout the document a topology of four ASs is used to illustrate the use of communities in the following configuration:
 <figure align="center"><artwork><![CDATA[
         AS 65551
             |
@@ -398,7 +398,7 @@
 
         <section title="Acknowledgments">
             <t>
-                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, Greg Hankins, Nick Hilliard, and Will Hargrave.
+                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, Greg Hankins, Nick Hilliard, Will Hargrave, and Randy Bush.
             </t>
         </section>
 
