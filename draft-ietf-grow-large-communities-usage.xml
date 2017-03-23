@@ -331,17 +331,17 @@
                         </postamble>
                     </texttable>
                 </section>
-                <section title="Location Based Manipulation of LOCAL_PREF">
+                <section title="Region Based Manipulation of LOCAL_PREF">
                     <t>
-                        AS 64497 could place one of the previously defined Preference Function Identifiers in the Function field and use an ISO 3166-1 numeric country identifier in the Parameter field to designate the geographical region within which the non-default LOCAL_PREF associated with that function identifier should be applied to the route.
+                        AS 64497 could place one of the previously defined Preference Function Identifiers in the Function field and use a UN M.49 numeric region identifier in the Parameter field to designate the geographical region within which the non-default LOCAL_PREF associated with that function identifier should be applied to the route.
                         The value of the LOCAL_PREF attribute should not deviate from the default for that route class in any region not specified by one or more of these Action Communities.
                     </t>
                     <texttable title="Action: Regional LOCAL_PREF Manipulation" anchor='action_pref_region'>
                         <ttcol align='center'>BGP Large Community</ttcol>
                         <ttcol align='left'>Description</ttcol>
-                        <c>64497:9:528</c><c>Assign LOCAL_PREF for a customer backup route on BGP speakers in the Netherlands</c>
-                        <c>64497:10:392</c><c>Assign LOCAL_PREF for a peering route on BGP speakers in Japan</c>
-                        <c>64497:12:840</c><c>Assign LOCAL_PREF for a fallback route on BGP speakers in United States of America</c>
+                        <c>64497:9:3</c><c>Assign the LOCAL_PREF value equivalent to a customer backup class route on BGP routers in the North America region</c>
+                        <c>64497:10:5</c><c>Assign the LOCAL_PREF value equivalent to a peering class route on BGP routers in the South America region</c>
+                        <c>64497:12:142</c><c>Assign the LOCAL_PREF value equivalent to a fallback class route on BGP routers in the Asia region</c>
                         <postamble>
                             Example documentation for Action Communities deployed by AS 64497 to expose a BGP traffic engineering function which allows a BGP neighbor to selectively manipulate the LOCAL_PREF attribute within AS 64497 in the geographical region specified in the Parameter field.
                         </postamble>
