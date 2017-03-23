@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="info" docName="draft-ietf-grow-large-communities-usage-04" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-grow-large-communities-usage-05" ipr="trust200902">
     <front>
         <title>Use of BGP Large Communities</title>
 
