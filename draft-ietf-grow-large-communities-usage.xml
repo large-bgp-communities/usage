@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="info" docName="draft-ietf-grow-large-communities-usage-05" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-grow-large-communities-usage-06" ipr="trust200902">
     <front>
         <title>Use of BGP Large Communities</title>
 
@@ -75,7 +75,7 @@
         <section title="Introduction">
             <t>
                 <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between Autonomous Systems (ASs).
-                This document presents examples of how operators might utilize BGP Large Communities to achieve various goals.
+                In very much the same way that <xref target="RFC1998"/> provides a concrete real-world application for <xref target="RFC1997" /> communities, this document presents examples of how operators might utilize BGP Large Communities to achieve various goals.
                 This document draws on the experience of operator communities such as <eref target="https://www.nanog.org">NANOG</eref> and <eref target="https://nlnog.net">NLNOG</eref>.
             </t>
         </section>
@@ -179,7 +179,7 @@
                         </postamble>
                     </texttable>
                 </section>
-                <section title="A UN M.49 Region Function">
+                <section title="An UN M.49 Region Function">
                     <t>
                         AS 64497 could assign a value of 2 to the Function field to designate the content of the Parameter field as the M.49 numeric code published by the <eref target="https://unstats.un.org/unsd/methodology/m49/">United Nations Statistics Division (UNSD)</eref> for macro geographical (continental) regions, geographical sub-regions, or selected economic and other groupings.
                     </t>
@@ -333,7 +333,7 @@
                 </section>
                 <section title="Region Based Manipulation of LOCAL_PREF">
                     <t>
-                        AS 64497 could place one of the previously defined Preference Function Identifiers in the Function field and use a UN M.49 numeric region identifier in the Parameter field to designate the geographical region within which the non-default LOCAL_PREF associated with that function identifier should be applied to the route.
+                        AS 64497 could place one of the previously defined Preference Function Identifiers in the Function field and use an UN M.49 numeric region identifier in the Parameter field to designate the geographical region within which the non-default LOCAL_PREF associated with that function identifier should be applied to the route.
                         The value of the LOCAL_PREF attribute should not deviate from the default for that route class in any region not specified by one or more of these Action Communities.
                     </t>
                     <texttable title="Action: Regional LOCAL_PREF Manipulation" anchor='action_pref_region'>
@@ -411,6 +411,7 @@
             <?rfc include="reference.RFC.8092"?>
         </references>
         <references title="Informative References">
+            <?rfc include="reference.RFC.1998"?>
             <?rfc include="reference.RFC.4264"?>
             <?rfc include="reference.RFC.7947"?>
             <?rfc include="reference.RFC.7948"?>
