@@ -392,11 +392,11 @@
             </t>
             <t>
 		In particular and in the same respect as BGP Communities <xref target="RFC1997"/>, operators should be congnizant that any community can be carried in an update.
-		Therefore, a BGP Large Community solely used internally, not intended to be permitted from the neighboring AS or its downstream ASes, or those which may be subsequently interpretted by neighbors to whom the routes are propagated must be considered by the operator for propagation or filtering to prevent unintended results, whether an action or informational BGP Large Community.
+		Therefore, a BGP Large Community solely used internally, not intended to be permitted from a given neighboring AS or its downstream ASes, or those which may be subsequently interpretted by neighbors to whom the routes are propagated must be considered by the operator for propagation or filtering to prevent unintended results, whether an action or informational BGP Large Community.
             </t>
             <t>
-		However, it is equally important to recognize that BGP neighbors, particularly customers of the operator and their customers, may utilize communities of the operator's BGP neighbors, especially transit providers, or the downsream ASes of those neighbors.
-		They may wish to send routes with action communities and receive routes with information communities and it is beneficial to all to permit this.
+		However, it is equally important to recognize that BGP neighbors, particularly customers of the operator and their customers, may utilize communities defined by other BGP neighbors of the operator, especially transit providers, or downsream ASes of those neighbors.
+		They may wish to send routes with action communities and receive routes with informational communities to or from these other neighbors and it is beneficial to all to permit this.
             </t>
         </section>
 
