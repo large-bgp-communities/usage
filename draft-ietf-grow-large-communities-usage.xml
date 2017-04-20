@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="info" docName="draft-ietf-grow-large-communities-usage-06" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-grow-large-communities-usage-07" ipr="trust200902">
     <front>
         <title>Use of BGP Large Communities</title>
 
@@ -66,8 +66,8 @@
         <abstract>
             <t>
                 This document presents examples and inspiration for operator's application of BGP Large Communities.
-		Based on operator experience with BGP Communties, it suggests logical categories of BGP Large Communities and demonstrates an orderly manner of organizing community values within them to achieve common goals in routing policy.
-		Any operator could use the concepts presented as the basis for their own BGP Large Community repertoire.
+                Based on operational experience with BGP Communties, this document suggests logical categories of BGP Large Communities and demonstrates an orderly manner of organizing community values within them to achieve typical goals in routing policy.
+                Any operator can consider using the concepts presented as the basis for their own BGP Large Communities repertoire.
             </t>
         </abstract>
 
@@ -391,12 +391,9 @@
                 Operators should note the recommendations in Section 11 of BGP Operations and Security <xref target="RFC7454"/> and handle BGP Large Communities with their ASN in the Global Administrator field similarly.
             </t>
             <t>
-		In particular and in the same respect as BGP Communities <xref target="RFC1997"/>, operators should be congnizant that any community can be carried in an update.
-		Therefore, a BGP Large Community solely used internally, not intended to be permitted from a given neighboring AS or its downstream ASes, or those which may be subsequently interpretted by neighbors to whom the routes are propagated must be considered by the operator for propagation or filtering to prevent unintended results, whether an action or informational BGP Large Community.
-            </t>
-            <t>
-		However, it is equally important to recognize that BGP neighbors, particularly customers of the operator and their customers, may utilize communities defined by other BGP neighbors of the operator, especially transit providers, or downsream ASes of those neighbors.
-		They may wish to send routes with action communities and receive routes with informational communities to or from these other neighbors and it is beneficial to all to permit this.
+                In particular and in the same respect as BGP Communities <xref target="RFC1997"/>, operators should be congnizant that any Large Community can be carried in a BGP UPDATE.
+                Operators should recognize that BGP neighbors, particularly customers and customers of customers, may utilize communities defined by other BGP neighbors of the operator.
+                They may wish to send routes with action communities and receive routes with informational communities to or from these other neighbors and it is beneficial to all to permit this.
             </t>
         </section>
 
@@ -408,7 +405,7 @@
 
         <section title="Acknowledgments">
             <t>
-                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, Greg Hankins, Nick Hilliard, Will Hargrave, Randy Bush, Shawn Morris and Jay Borkenhagen.
+                The authors would like to gratefully acknowledge the insightful comments, contributions, critique and support from Adam Chappell, Jonathan Stewart, Greg Hankins, Nick Hilliard, Will Hargrave, Randy Bush, Shawn Morris, Jay Borkenhagen and Stewart Bryant.
             </t>
         </section>
 
