@@ -642,8 +642,8 @@ Internet-Draft        Use of BGP Large Communities            April 2017
    Alternatively, route server client AS 64501 may have a selective
    routing policy and may wish to interconnect with only AS 64505 and AS
    64506.  This could be implemented by announcing routes labeled with
-   64497:0:0 (blocking all distribution by default) and 64497:1:64505,
-   64497:1:64506 to instruct the route server to force announcement to
+   64497:13:0 (blocking all distribution by default) and 64497:14:64505,
+   64497:14:64506 to instruct the route server to force announcement to
    those two ASNs.
 
 5.  Security Considerations
