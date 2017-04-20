@@ -622,11 +622,11 @@ Internet-Draft        Use of BGP Large Communities            April 2017
    | BGP Large         | Description                                   |
    | Community         |                                               |
    +-------------------+-----------------------------------------------+
-   | 64497:0:peer-as   | Explicitly prevent announcement of route to   |
+   | 64497:13:peer-as  | Explicitly prevent announcement of route to   |
    |                   | peer-as                                       |
-   | 64497:1:peer-as   | Explicitly announce route to peer-as          |
-   | 64497:0:0         | Do not announce route to any peers by default |
-   | 64497:1:0         | Announce route to all peers by default        |
+   | 64497:14:peer-as  | Explicitly announce route to peer-as          |
+   | 64497:13:0        | Do not announce route to any peers by default |
+   | 64497:14:0        | Announce route to all peers by default        |
    +-------------------+-----------------------------------------------+
 
         Table 12: Action: Route Server Prefix Distribution Control
