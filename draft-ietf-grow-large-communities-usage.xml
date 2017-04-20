@@ -364,24 +364,24 @@
                     One widely-used mechanism is a route server specific adaption of <xref target="selective_noexport">"ASN Based Selective NO_EXPORT"</xref>.
                 </t>
                 <t>
-                    An example BGP Large Communities policy which enables client-controlled prefix distribution for a route server operating as AS 64497, is outlined as follows:
+                    An example BGP Large Communities policy which enables client-controlled prefix distribution for a route server operating as AS 64511, is outlined as follows:
                 </t>
                 <texttable title="Action: Route Server Prefix Distribution Control" anchor='action_rs_distribution'>
                     <ttcol align='left'>BGP Large Community</ttcol>
                     <ttcol align='left'>Description</ttcol>
-                    <c>64497:13:peer-as</c><c>Explicitly prevent announcement of route to peer-as</c>
-                    <c>64497:14:peer-as</c><c>Explicitly announce route to peer-as</c>
-                    <c>64497:13:0</c><c>Do not announce route to any peers by default</c>
-                    <c>64497:14:0</c><c>Announce route to all peers by default</c>
+                    <c>64511:0:peer-as</c><c>Explicitly prevent announcement of route to peer-as</c>
+                    <c>64511:1:peer-as</c><c>Explicitly announce route to peer-as</c>
+                    <c>64511:0:0</c><c>Do not announce route to any peers by default</c>
+                    <c>64511:1:0</c><c>Announce route to all peers by default</c>
                 </texttable>
                 <t>
                     Multiple BGP Large Community values can be used together to implement fine-grained route distribution control.
-                    For example, route server client AS 64500 might wish to use a route server for interconnecting to all other clients except AS 64510.
-                    In this case, they would label all their outbound routes to the route server with 64497:14:0 (to announce to all clients by default) and 64497:13:64510 (to prevent announcement to AS 64510).
+                    For example, route server client AS 64500 might wish to use a route server for interconnecting to all other clients except AS 64509.
+                    In this case, they would label all their outbound routes to the route server with 64511:1:0 (to announce to all clients by default) and 64511:0:64509 (to prevent announcement to AS 64509).
                 </t>
                 <t>
                     Alternatively, route server client AS 64501 may have a selective routing policy and may wish to interconnect with only AS 64505 and AS 64506.
-                    This could be implemented by announcing routes labeled with 64497:13:0 (blocking all distribution by default) and 64497:14:64505, 64497:14:64506 to instruct the route server to force announcement to those two ASNs.
+                    This could be implemented by announcing routes labeled with 64511:0:0 (blocking all distribution by default) and 64511:1:64505, 64511:1:64506 to instruct the route server to force announcement to those two ASNs.
                 </t>
             </section>
         </section>
