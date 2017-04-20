@@ -369,10 +369,10 @@
                 <texttable title="Action: Route Server Prefix Distribution Control" anchor='action_rs_distribution'>
                     <ttcol align='left'>BGP Large Community</ttcol>
                     <ttcol align='left'>Description</ttcol>
-                    <c>64497:0:peer-as</c><c>Explicitly prevent announcement of route to peer-as</c>
-                    <c>64497:1:peer-as</c><c>Explicitly announce route to peer-as</c>
-                    <c>64497:0:0</c><c>Do not announce route to any peers by default</c>
-                    <c>64497:1:0</c><c>Announce route to all peers by default</c>
+                    <c>64497:13:peer-as</c><c>Explicitly prevent announcement of route to peer-as</c>
+                    <c>64497:14:peer-as</c><c>Explicitly announce route to peer-as</c>
+                    <c>64497:13:0</c><c>Do not announce route to any peers by default</c>
+                    <c>64497:14:0</c><c>Announce route to all peers by default</c>
                 </texttable>
                 <t>
                     Multiple BGP Large Community values can be used together to implement fine-grained route distribution control.
