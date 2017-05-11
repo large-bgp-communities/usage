@@ -76,7 +76,7 @@
     <middle>
         <section title="Introduction">
             <t>
-                <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between Autonomous Systems (ASs).
+                <xref target="RFC8092">BGP Large Communities</xref> provide a mechanism to signal opaque information between and within Autonomous Systems (ASs).
                 In very much the same way that <xref target="RFC1998"/> provides a concrete real-world application for <xref target="RFC1997" /> communities, this document presents examples of how operators might utilize BGP Large Communities to achieve various goals.
                 This document draws on the experience of operator communities such as <eref target="https://www.nanog.org">NANOG</eref> and <eref target="https://nlnog.net">NLNOG</eref>.
             </t>
