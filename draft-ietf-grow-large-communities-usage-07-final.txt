@@ -100,12 +100,12 @@ Table of Contents
 1.  Introduction
 
    BGP Large Communities [RFC8092] provide a mechanism to signal opaque
-   information between Autonomous Systems (ASs).  In very much the same
-   way that [RFC1998] provides a concrete real-world application for
-   [RFC1997] communities, this document presents examples of how
-   operators might utilize BGP Large Communities to achieve various
-   goals.  This document draws on the experience of operator communities
-   such as NANOG [1] and NLNOG [2].
+   information between and within Autonomous Systems (ASs).  In very
+   much the same way that [RFC1998] provides a concrete real-world
+   application for [RFC1997] communities, this document presents
+   examples of how operators might utilize BGP Large Communities to
+   achieve various goals.  This document draws on the experience of
+   operator communities such as NANOG [1] and NLNOG [2].
 
 
 
@@ -606,7 +606,7 @@ Internet-Draft        Use of BGP Large Communities              May 2017
 
    An example BGP Large Communities policy which enables client-
    controlled prefix distribution for a route server operating as AS
-   64497, is outlined as follows:
+   64511, is outlined as follows:
 
 
 
@@ -622,11 +622,11 @@ Internet-Draft        Use of BGP Large Communities              May 2017
    | BGP Large         | Description                                   |
    | Community         |                                               |
    +-------------------+-----------------------------------------------+
-   | 64497:13:peer-as  | Explicitly prevent announcement of route to   |
+   | 64511:0:peer-as   | Explicitly prevent announcement of route to   |
    |                   | peer-as                                       |
-   | 64497:14:peer-as  | Explicitly announce route to peer-as          |
-   | 64497:13:0        | Do not announce route to any peers by default |
-   | 64497:14:0        | Announce route to all peers by default        |
+   | 64511:1:peer-as   | Explicitly announce route to peer-as          |
+   | 64511:0:0         | Do not announce route to any peers by default |
+   | 64511:1:0         | Announce route to all peers by default        |
    +-------------------+-----------------------------------------------+
 
         Table 12: Action: Route Server Prefix Distribution Control
@@ -634,16 +634,16 @@ Internet-Draft        Use of BGP Large Communities              May 2017
    Multiple BGP Large Community values can be used together to implement
    fine-grained route distribution control.  For example, route server
    client AS 64500 might wish to use a route server for interconnecting
-   to all other clients except AS 64510.  In this case, they would label
-   all their outbound routes to the route server with 64497:14:0 (to
-   announce to all clients by default) and 64497:13:64510 (to prevent
-   announcement to AS 64510).
+   to all other clients except AS 64509.  In this case, they would label
+   all their outbound routes to the route server with 64511:1:0 (to
+   announce to all clients by default) and 64511:0:64509 (to prevent
+   announcement to AS 64509).
 
    Alternatively, route server client AS 64501 may have a selective
    routing policy and may wish to interconnect with only AS 64505 and AS
    64506.  This could be implemented by announcing routes labeled with
-   64497:13:0 (blocking all distribution by default) and 64497:14:64505,
-   64497:14:64506 to instruct the route server to force announcement to
+   64511:0:0 (blocking all distribution by default) and 64511:1:64505,
+   64511:1:64506 to instruct the route server to force announcement to
    those two ASNs.
 
 5.  Security Considerations
